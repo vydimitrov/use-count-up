@@ -1,4 +1,4 @@
-# useElapsedTime Rook hook
+# useElapsedTime React hook
 The only hook you need to perform JavaScript animations in React.
 
 * Lightweight only 1KB
