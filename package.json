@@ -1,6 +1,6 @@
 {
   "name": "use-elapsed-time",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "React hook to get the elapsed time in an animation using requestAnimationFrame",
   "main": "./lib/index.js",
   "scripts": {
