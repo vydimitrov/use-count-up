@@ -2,7 +2,7 @@
 The only hook you need to perform JavaScript animations in React.
 
 * Lightweight: only 2KB
-* Build with 0 dependencies
+* Built with 0 dependencies
 * Toggle play/pause
 * Combine with [any easing function](https://github.com/danro/jquery-easing/blob/master/jquery.easing.js) to get the right animation
 
@@ -39,8 +39,8 @@ const MyComponent = () => {
   ): number;
 ```
 
-The first arguments `isPlaying` indicates if the loop to get the elapsed time is running or it is paused.
-The second argument `congif` is optional and it makes sense when the animation duration (`durationMilliseconds`) is defined. `onComplete` callback will be fired when the duration is reached. If `isRepeated` is set the elapsed time loop will start over once the duration is reached.
+The first argument `isPlaying` indicates if the loop to get the elapsed time is running or it is paused.
+The second argument `config` is optional and it makes sense when the animation duration (`durationMilliseconds`) is defined. `onComplete` callback will be fired when the duration is reached. If `isRepeated` is set, the elapsed time loop will start over once the duration is reached.
 The hook returns elapsed time in milliseconds.  
 
 ## Use cases
