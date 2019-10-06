@@ -1,9 +1,9 @@
 # useElapsedTime React hook
 The only hook you need to perform JavaScript animations in React.
 
-* Lightweight only 1KB
+* Lightweight: only 2KB
 * Build with 0 dependencies
-* Toggle pay/pause
+* Toggle play/pause
 * Combine with [any easing function](https://github.com/danro/jquery-easing/blob/master/jquery.easing.js) to get the right animation
 
 ## Installation
