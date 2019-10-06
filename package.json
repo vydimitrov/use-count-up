@@ -1,7 +1,7 @@
 {
   "name": "use-elapsed-time",
   "version": "1.0.0",
-  "description": "React hook to get the elapsed time in an animation",
+  "description": "React hook to get the elapsed time in an animation using requestAnimationFrame",
   "main": "./lib/index.js",
   "scripts": {
     "build": "webpack",
@@ -15,7 +15,8 @@
     "React",
     "hooks",
     "requestAnimationFrame",
-    "animation"
+    "animation",
+    "loop"
   ],
   "author": "Vasil Dimitrov",
   "license": "MIT",
