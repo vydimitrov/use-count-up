@@ -90,8 +90,9 @@ const easing = (t, b, c, d) => {
     return c*((t=t/d-1)*t*t + 1) + b;
 };
 
+// define the path by an array of cordinates [x, y] 
 const points = [[150,200],[151,201], ...];
-const pointsLength = 530;
+const pointsLength = 530 - 1;
 const isPlaying = true;
 const durationMilliseconds = 4000;
 const config = { durationMilliseconds, isRepeated: true };
