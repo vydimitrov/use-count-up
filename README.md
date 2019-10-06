@@ -40,7 +40,7 @@ const MyComponent = () => {
 ```
 
 The first argument `isPlaying` indicates if the loop to get the elapsed time is running or it is paused.
-The second argument `config` is optional and it makes sense when the animation duration (`durationMilliseconds`) is defined. `onComplete` callback will be fired when the duration is reached. If `isRepeated` is set, the elapsed time loop will start over once the duration is reached.
+The second argument `config` is optional and it makes sense when the animation duration `durationMilliseconds` is defined. `onComplete` callback will be fired when the duration is reached. If `isRepeated` is set, the elapsed time loop will start over once the duration is reached.
 The hook returns elapsed time in milliseconds.  
 
 ## Use cases
@@ -48,11 +48,11 @@ The hook returns elapsed time in milliseconds.
 ```
 import { useElapsedTime } from 'use-elapsed-time';
 
-const CountDownTimerComponent = () => {
-  const isPlaying = true;
-  const durationMilliseconds = 5000;
-  const config = { durationMilliseconds };
-  
+const isPlaying = true;
+const durationMilliseconds = 5000;
+const config = { durationMilliseconds };
+
+const CountDownTimerComponent = () => {  
   const elapsedTime = useElapsedTime(isPlaying, config);
   const remainingTime = Math.ceil((durationMilliseconds - elapsedTime) / 1000);
   
