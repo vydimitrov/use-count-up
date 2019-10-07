@@ -26,6 +26,7 @@ const MyComponent = () => {
   return elapsedTime;
 };
 ```
+[Basic usage demo](https://codesandbox.io/s/epic-dream-hn62k)
 
 ## Function signature
 ```
