@@ -83,6 +83,7 @@ const CountUpComponent = () => {
     return <div>{Math.round(currentValue)}</div>;
 };
 ```
+[Count up demo](https://codesandbox.io/s/hungry-cray-hl6wn)
 
 ### None-liner path animation
 ```
