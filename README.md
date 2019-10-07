@@ -85,7 +85,7 @@ const CountUpComponent = () => {
 ```
 [Count up demo](https://codesandbox.io/s/hungry-cray-hl6wn)
 
-### None-liner path animation
+### Non-liner path animation
 ```
 import { useElapsedTime } from 'use-elapsed-time';
 
@@ -102,8 +102,8 @@ const config = { durationMilliseconds, isRepeated: true };
 
 const BounceAnimation = () => {
     const elapsedTime = useElapsedTime(isPlaying, config);
-    const currentPoint = easing(elapsedTime, 0, pointsLength, durationMilliseconds) | 0;
-    const colorValue = easing(elapsedTime, 0, 255, durationMilliseconds) | 0;
+    const currentPoint = easing(elapsedTime, 0, pointsLength, durationMilliseconds);
+    const colorValue = easing(elapsedTime, 0, 255, durationMilliseconds);
   
     const pointStyle = {
         position: 'absolute',
@@ -123,3 +123,5 @@ const BounceAnimation = () => {
     );
 };
 ```
+
+[Demo non-linear animation](https://codesandbox.io/s/inspiring-austin-d6ol6)
