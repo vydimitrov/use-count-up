@@ -16,7 +16,7 @@ npm install use-elapsed-time
 ```
 
 ## Basic usage
-```
+```jsx
 import { useElapsedTime } from 'use-elapsed-time';
 
 const MyComponent = () => {
@@ -29,7 +29,7 @@ const MyComponent = () => {
 [Basic usage demo](https://codesandbox.io/s/epic-dream-hn62k)
 
 ## Function signature
-```
+```js
   const useElapsedTime = (
     isPlaying: boolean,
     config?: {
@@ -46,7 +46,7 @@ The hook returns elapsed time in milliseconds.
 
 ## Use cases
 ### Countdown timer
-```
+```jsx
 import { useElapsedTime } from 'use-elapsed-time';
 
 const isPlaying = true;
@@ -63,7 +63,7 @@ const CountDownTimerComponent = () => {
 [Countdown timer demo](https://codesandbox.io/s/priceless-hill-2tbiq)
 
 ### Count Up
-```
+```jsx
 import { useElapsedTime } from 'use-elapsed-time';
 
 const easing = (t, b, c, d) => {
@@ -86,7 +86,7 @@ const CountUpComponent = () => {
 [Count up demo](https://codesandbox.io/s/hungry-cray-hl6wn)
 
 ### Non-liner path animation
-```
+```jsx
 import { useElapsedTime } from 'use-elapsed-time';
 
 const easing = (t, b, c, d) => {
