@@ -1,7 +1,7 @@
 {
-  "name": "use-elapsed-time",
-  "version": "1.0.4",
-  "description": "React hook to get the elapsed time in an animation using requestAnimationFrame",
+  "name": "use-count-up",
+  "version": "1.0.0",
+  "description": "",
   "main": "./lib/index.js",
   "scripts": {
     "build": "webpack",
@@ -9,21 +9,22 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/vydimitrov/use-elapsed-time.git"
+    "url": "git+https://github.com/vydimitrov/use-count-up.git"
   },
   "keywords": [
+    "count up",
     "React",
-    "hooks",
-    "requestAnimationFrame",
-    "animation",
-    "loop"
+    "hooks"
   ],
   "author": "Vasil Dimitrov",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/vydimitrov/use-elapsed-time/issues"
+    "url": "https://github.com/vydimitrov/use-count-up/issues"
   },
-  "homepage": "https://github.com/vydimitrov/use-elapsed-time#readme",
+  "homepage": "https://github.com/vydimitrov/use-count-up#readme",
+  "dependencies": {
+    "use-elapsed-time": "^1.0.4"
+  },
   "peerDependencies": {
     "react": "^16.8.0",
     "react-dom": "^16.8.0"
