@@ -42,4 +42,7 @@ const MyComponent = () => {
     }
   ): number|string|node;
 ```
-
+The function takes two agruments: 
+1. `isCounting` - boolean to toggle the counting animation
+2. `config` - optional configuration object with the following properties:
+  * `start` - Initial value
