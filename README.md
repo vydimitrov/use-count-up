@@ -37,6 +37,7 @@ const MyComponent = () => {
       end?: number,
       duration?: number,
       onComplete?: () => void,
+      easing: (t, b, c, d) => void,
       formatter?: (value: number) => number|string|node,
     }
   ): number|string|node;
