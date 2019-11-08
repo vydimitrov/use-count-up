@@ -12,7 +12,9 @@
     "url": "git+https://github.com/vydimitrov/use-count-up.git"
   },
   "keywords": [
+    "animate numerical value",
     "count up",
+    "counting",
     "React",
     "hooks"
   ],
