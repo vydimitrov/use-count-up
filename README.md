@@ -1,5 +1,5 @@
 # useCountUp React hook
-Only 2KB React hook to animate counting to a number, infinite or even beyond.
+Only 5KB React hook to animate counting to a number, infinite or even beyond.
 
 ## Installation
 ```
