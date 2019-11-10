@@ -43,7 +43,7 @@ The function takes two agruments and returns the value from the `formatter` meth
       easing?: (t: number, b: number, c: number, d: number) => number,
       formatter?: (value: number) => number|string|node,
     }
-  ): number|string|node;
+  ) => number|string|node;
 ```
 ### 1st agrument `isCounting: boolean`
 > Default: `isCounting = false`
