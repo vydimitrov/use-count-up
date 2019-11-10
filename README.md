@@ -53,7 +53,7 @@ Toggle the counting animation. It can be used to start the animation when the el
 ### 2nd argument `config: object`
 > Default:  `config = {}`
 
-Optional configuration object with the following properties:
+Optional configuration object with the following properties and methods:
 
 #### `start: number`  
 > Default:  `start = 0`
