@@ -9,9 +9,7 @@ const defaultConfig = {
 	formatter: value => Math.round(value)
 };
 
-const getReturnValue = (formatter, value) => {
-	return typeof formatter === 'function' ? formatter(value) : value;
-};
+const getReturnValue = (formatter, value) => (typeof formatter === 'function' ? formatter(value) : value);
 
 const useCountUp = (isCounting = false, config = {}) => {
 	const {
@@ -23,10 +21,11 @@ const useCountUp = (isCounting = false, config = {}) => {
 		onComplete
 	} = { ...defaultConfig, ...config };
 
-	const durationMilliseconds = typeof duration === 'number' ? duration * 1000 : undefined;
+	const hasDuration = typeof duration === 'number';
+	const durationMilliseconds = hasDuration ? duration * 1000 : undefined;
 	const elapsedTime = useElapsedTime(isCounting, { durationMilliseconds, onComplete });
 
-	if (typeof end === 'undefined' || typeof duration === 'undefined' || typeof easing !== 'function') {
+	if (typeof end === 'undefined' || !hasDuration || typeof easing !== 'function') {
 		return getReturnValue(formatter, elapsedTime);
 	}
 
