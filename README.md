@@ -1,5 +1,5 @@
 # useCountUp React hook
-Only 4.5KB React hook to animate counting up or down to a number, infinity, or even beyond.
+Only 4.6kB min / 1.5kB min+gzip React hook to animate counting up or down to a number, infinity, or even beyond.
 
 Display your data in an attractive way to make sure the important numbers are highlighted in an eye-catching format.
 
