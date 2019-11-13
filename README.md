@@ -20,7 +20,9 @@ npm install use-count-up
 ## Demo
 Check the demo on CodeSandbox to get started  
 
-[![Edit aged-monad-0mrfu](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/aged-monad-0mrfu?fontsize=14)
+<a target="_blank" href="https://codesandbox.io/s/aged-monad-0mrfu?fontsize=14">
+  <img alt="Edit 0mrfu" src="https://codesandbox.io/static/img/play-codesandbox.svg">
+</a>
 
 ## Basic usage
 ```jsx
