@@ -17,6 +17,11 @@ or
 npm install use-count-up
 ```
 
+## Demo
+Check the demo on CodeSandbox to get started  
+
+[![Edit aged-monad-0mrfu](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/aged-monad-0mrfu?fontsize=14)
+
 ## Basic usage
 ```jsx
 import { useCountUp } from 'use-count-up';
