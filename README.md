@@ -43,7 +43,7 @@ const MyComponent = () => {
 ## Function signature
 The function takes two agruments and returns the value from the `formatter` method.
 ```js
-  const useCountUp = (
+  function useCountUp(
     isCounting: boolean,
     config?: {
       start?: number,
