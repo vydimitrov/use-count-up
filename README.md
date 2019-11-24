@@ -5,6 +5,8 @@ Display your data in an attractive way to make sure the important numbers are hi
 
 Unlike other similar solutions, this hook allows you to count up/down with or without providing end values.
 
+The library comes with built-in and ready-to-use TypeScript type definitions.
+
 
 <img src="https://user-images.githubusercontent.com/10707142/68539807-2f77ba80-0389-11ea-978c-8955e9b8db9f.gif" width="700">
 
@@ -80,10 +82,10 @@ Target value.
 
 Animation duration in seconds. Example: `3`, `4.2`, `0.5`
 
-#### `onComplete: () => void`  
+#### `onComplete: () => void | [shouldRepeat: boolean, delay: number]`  
 > Default:  `onComplete = undefined`
 
-On animation complete event handler.
+On animation complete event handler. It can be used to restart the animation by returning an array where the first element "shouldRepeat" indicates if the loop should start over and second element "delay" specifies the delay before looping again in milliseconds.
 
 #### `easing: (t: number, b: number, c: number, d: number) => number,`  
 > Default:  `easing = (t, b, c, d) => { t /= d; t--; return c*(t*t*t*t*t + 1) + b; }`  // easeOutQuint
