@@ -85,7 +85,7 @@ Animation duration in seconds. Example: `3`, `4.2`, `0.5`
 #### `onComplete: () => void | [shouldRepeat: boolean, delay: number]`  
 > Default:  `onComplete = undefined`
 
-On animation complete event handler. It can be used to restart the animation by returning an array where the first element "shouldRepeat" indicates if the loop should start over and second element "delay" specifies the delay before looping again in milliseconds.
+On animation complete event handler. It can be used to restart the animation by returning an array where the first element `shouldRepeat` indicates if the loop should start over and second element `delay` specifies the delay before looping again in milliseconds.
 
 #### `easing: (t: number, b: number, c: number, d: number) => number,`  
 > Default:  `easing = (t, b, c, d) => { t /= d; t--; return c*(t*t*t*t*t + 1) + b; }`  // easeOutQuint
