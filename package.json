@@ -1,8 +1,13 @@
 {
   "name": "use-count-up",
-  "version": "1.0.1",
-  "description": "",
+  "version": "1.0.2",
+  "description": "Lightweight React hook to animate counting up or down to a number, infinity, or even beyond",
   "main": "./lib/index.js",
+  "files": [
+    "lib",
+    "types"
+  ],
+  "types": "types/use-count-up.d.ts",
   "scripts": {
     "build": "webpack",
     "prepare": "install-peers"
@@ -25,7 +30,7 @@
   },
   "homepage": "https://github.com/vydimitrov/use-count-up#readme",
   "dependencies": {
-    "use-elapsed-time": "^1.0.4"
+    "use-elapsed-time": "^1.1.2"
   },
   "peerDependencies": {
     "react": "^16.8.0",
