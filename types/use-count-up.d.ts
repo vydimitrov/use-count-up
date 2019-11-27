@@ -1,4 +1,7 @@
 import * as React from 'react';
+import * as useElapsedTime from 'use-elapsed-time';
+
+type ReturnValue = number | string | React.ReactNode;
 
 /** Optional configuration object */
 export interface Config {
@@ -8,21 +11,20 @@ export interface Config {
     end?: number,
     /** Animation duration in seconds */
     duration?: number,
-    /** On animation complete event handler. It can be used to restart the animation by returning an array where the first element "shouldRepeat" indicates if the loop should start over and second element "delay" specifies the delay before looping again in milliseconds. */
-    onComplete?: () => void | [boolean, number], // [shouldRepeat: boolean, delay: number]
-    /** 
-     * Easing function to control how the animation is progressing
-     * t - current time
-     * b - start value
-     * c - change in value
-     * d - duration
-     */
-    easing?: (t: number, b: number, c: number, d: number) => number,
+     /** On animation complete event handler. */
+    onComplete?: useElapsedTime.Config.onComplete,
+    /**  Easing function to control how the animation is progressing */
+    easing?: (
+        currentTime: number,
+        startValue: number,
+        changeInValue: number,
+        duration: number
+    ) => number,
     /** A function that formats the output value */
-    formatter?: (value: number) => React.ReactNode
+    formatter?: (value: number) => ReturnValue
 }
 
 export function useCountUp(
     isCounting: boolean,
     config?: Config
-): React.ReactNode;
+): ReturnValue;

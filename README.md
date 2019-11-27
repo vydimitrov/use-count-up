@@ -51,11 +51,11 @@ The function takes two agruments and returns the value from the `formatter` meth
       start?: number,
       end?: number,
       duration?: number,
-      onComplete?: () => void,
+      onComplete?: () => undefined | [shouldRepeat: boolean, delay: number],
       easing?: (t: number, b: number, c: number, d: number) => number,
-      formatter?: (value: number) => number|string|node,
+      formatter?: (value: number) => number | string | node,
     }
-  ) => number|string|node;
+  ) => number | string | node;
 ```
 ### 1st agrument `isCounting: boolean`
 > Default: `isCounting = false`
@@ -82,7 +82,7 @@ Target value.
 
 Animation duration in seconds. Example: `3`, `4.2`, `0.5`
 
-#### `onComplete: () => void | [shouldRepeat: boolean, delay: number]`  
+#### `onComplete: () => undefined | [shouldRepeat: boolean, delay: number]`  
 > Default:  `onComplete = undefined`
 
 On animation complete event handler. It can be used to restart the animation by returning an array where the first element `shouldRepeat` indicates if the loop should start over and second element `delay` specifies the delay before looping again in milliseconds.
@@ -96,7 +96,7 @@ On animation complete event handler. It can be used to restart the animation by 
 `d` - duration  
 Easing function to control how the animation is progressing. [There are a bunch of functions](http://www.gizma.com/easing/) that can be used to change that behaviour.
 
-#### `formatter: (value: number) => number|string|node`  
+#### `formatter: (value: number) => number | string | node`  
 > Default:  `formatter = value => Math.round(value)`
 
 A function that formats the output value. It can be used to add prefix or suffix to the value. A good formatting option is to use [`toLocaleString`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/toLocaleString), which will give the correct decimal and thousand separators.
