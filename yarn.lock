@@ -3212,10 +3212,10 @@ url@^0.11.0:
     punycode "1.3.2"
     querystring "0.2.0"
 
-use-elapsed-time@^1.1.2:
-  version "1.1.2"
-  resolved "https://registry.yarnpkg.com/use-elapsed-time/-/use-elapsed-time-1.1.2.tgz#cba00fe749434b23b510d83071fa5ee0c50337bd"
-  integrity sha512-sNwNogcINS1zj/0PA9K7TTDmo29aeTKFg9tyWNGGMBRTIQ4lkOo+vsHnb3htEZf9kXtjr0biuIOAj/Jyb/A5mw==
+use-elapsed-time@^1.1.3:
+  version "1.1.3"
+  resolved "https://registry.yarnpkg.com/use-elapsed-time/-/use-elapsed-time-1.1.3.tgz#f89f225538f44e83699a93a35a02fe3943e7bf15"
+  integrity sha512-70qb5RCIPV/2s+mNOCwo30e3/AxMet9i/zYsS4EE9LwY5bFy+WQg3sC9svgcnb+jUYzZCz9tKv6B23ZGgakRuQ==
 
 use@^3.1.0:
   version "3.1.1"

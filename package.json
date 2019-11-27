@@ -30,7 +30,7 @@
   },
   "homepage": "https://github.com/vydimitrov/use-count-up#readme",
   "dependencies": {
-    "use-elapsed-time": "^1.1.2"
+    "use-elapsed-time": "^1.1.3"
   },
   "peerDependencies": {
     "react": "^16.8.0",
