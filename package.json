@@ -10,17 +10,22 @@
   "types": "types/use-count-up.d.ts",
   "scripts": {
     "build": "webpack",
-    "prepare": "install-peers"
+    "prepublish": "yarn build",
+    "dev:push": "yarn build && yalc push",
+    "test": "jest",
+    "test-watch": "jest --watch"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/vydimitrov/use-count-up.git"
   },
   "keywords": [
+    "react",
+    "react-native",
     "animate numerical value",
     "count up",
+    "count down",
     "counting",
-    "React",
     "hooks"
   ],
   "author": "Vasil Dimitrov",
@@ -30,20 +35,21 @@
   },
   "homepage": "https://github.com/vydimitrov/use-count-up#readme",
   "dependencies": {
-    "use-elapsed-time": "^1.1.3"
+    "use-elapsed-time": "^1.2.1"
   },
   "peerDependencies": {
-    "react": "^16.8.0",
-    "react-dom": "^16.8.0"
+    "react": ">=16.8.0",
+    "prop-types": ">=15.7.1"
   },
   "devDependencies": {
+    "react": "16.8.0",
+    "prop-types": "15.7.1",
     "@babel/core": "^7.5.5",
     "@babel/preset-env": "^7.5.5",
     "@babel/preset-react": "^7.0.0",
     "babel-loader": "^8.0.6",
-    "install-peers-cli": "^2.1.1",
     "path": "^0.12.7",
-    "webpack": "^4.40.2",
-    "webpack-cli": "^3.3.8"
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.11"
   }
 }

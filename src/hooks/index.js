@@ -1,0 +1,1 @@
+export { useCountUp } from "./useCountUp";
