@@ -1,1 +1,1 @@
-export { useCountUp } from "./useCountUp";
+export { useCountUp } from './useCountUp'

@@ -1,4 +1,4 @@
-const path = require('path');
+const path = require('path')
 
 module.exports = {
   mode: 'production',
@@ -6,27 +6,27 @@ module.exports = {
   output: {
     path: path.resolve('lib'),
     filename: 'index.js',
-    libraryTarget: 'commonjs2'
+    libraryTarget: 'commonjs2',
   },
   module: {
     rules: [
       {
         test: /\.js?$/,
         exclude: /(node_modules)/,
-        use: 'babel-loader'
-      }
-    ]
+        use: 'babel-loader',
+      },
+    ],
   },
   resolve: {
-    extensions: ['.js'],
-    alias: { react: require.resolve("react") }
+    extensions: ['.js', '.jsx'],
+    alias: { react: require.resolve('react') },
   },
   externals: {
     react: {
       root: 'react',
       commonjs2: 'react',
       commonjs: 'react',
-      amd: 'react'
-    }
-  }
-};
+      amd: 'react',
+    },
+  },
+}
