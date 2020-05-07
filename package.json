@@ -1,13 +1,8 @@
 {
   "name": "use-count-up",
-  "version": "1.0.4",
+  "version": "2.0.0",
   "description": "Lightweight React hook to animate counting up or down to a number, infinity, or even beyond",
   "main": "./lib/index.js",
-  "files": [
-    "lib",
-    "types"
-  ],
-  "types": "types/use-count-up.d.ts",
   "scripts": {
     "build": "webpack",
     "prepublish": "yarn build",
@@ -44,12 +39,25 @@
   "devDependencies": {
     "react": "16.8.0",
     "prop-types": "15.7.1",
-    "@babel/core": "^7.5.5",
-    "@babel/preset-env": "^7.5.5",
-    "@babel/preset-react": "^7.0.0",
-    "babel-loader": "^8.0.6",
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.4.0",
+    "@types/jest": "^25.1.4",
+    "@types/node": "^12.12.31",
+    "@types/react": "^16.9.23",
+    "babel-jest": "^25.2.1",
+    "codecov": "^3.6.1",
+    "jest": "^25.2.1",
     "path": "^0.12.7",
+    "prettier": "^1.19.1",
+    "react-test-renderer": "^16.8.0",
+    "source-map-loader": "^0.2.4",
+    "ts-jest": "^25.2.1",
+    "ts-loader": "^6.2.1",
+    "typescript": "^3.8.3",
     "webpack": "^4.43.0",
     "webpack-cli": "^3.3.11"
-  }
+  },
+  "files": [
+    "lib"
+  ]
 }

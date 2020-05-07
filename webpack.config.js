@@ -1,8 +1,8 @@
-const path = require('path')
+var path = require('path')
 
 module.exports = {
   mode: 'production',
-  entry: './src/index.js',
+  entry: './src/index.ts',
   output: {
     path: path.resolve('lib'),
     filename: 'index.js',
@@ -11,22 +11,22 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.js?$/,
+        test: /\.ts(x?)$/,
         exclude: /(node_modules)/,
-        use: 'babel-loader',
+        use: 'ts-loader',
+      },
+      {
+        enforce: 'pre',
+        test: /\.js$/,
+        loader: 'source-map-loader',
       },
     ],
   },
   resolve: {
-    extensions: ['.js', '.jsx'],
+    extensions: ['.ts', '.tsx'],
     alias: { react: require.resolve('react') },
   },
   externals: {
-    react: {
-      root: 'react',
-      commonjs2: 'react',
-      commonjs: 'react',
-      amd: 'react',
-    },
+    react: 'react',
   },
 }

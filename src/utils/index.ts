@@ -1,0 +1,1 @@
+export { defaultEasing } from './defaultEasing'
