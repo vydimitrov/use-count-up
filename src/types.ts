@@ -1,7 +1,10 @@
-import { Config } from 'use-elapsed-time'
+import { Options, ElapsedTimeReturnValue } from 'use-elapsed-time'
+
+export type OnComplete = Options['onComplete']
+export type AutoResetKey = Options['autoResetKey']
+export type Reset = ElapsedTimeReturnValue['reset']
 
 export type ReturnValue = number | string | React.ReactNode
-export type OnComplete = Config['onComplete']
 export type Formatter = (value: number) => ReturnValue
 export type ToLocaleStringLocales = string | string[]
 export type ToLocaleStringOptions = {
@@ -21,6 +24,21 @@ export type ToLocaleStringOptions = {
   notation: string
 }
 
+export type EasingFn = (
+  currentTime: number,
+  startValue: number,
+  changeInValue: number,
+  duration: number
+) => number
+export type Easing = 'easeOutExpo' | 'easeInExpo' | 'linear' | EasingFn
+
+export type CountUpReturnProps = {
+  /** Current value of the count up animation */
+  value: ReturnValue
+  /** Method to start over the animation*/
+  reset: Reset
+}
+
 export type CountUpProps = {
   /** Play and pause counting animation. Default: false */
   isCounting?: boolean
@@ -34,7 +52,7 @@ export type CountUpProps = {
   decimalPlaces?: number
   /** Decimal separator character. Default: "." */
   decimalSeparator?: string
-  /** Thousands separator character. Default: " " */
+  /** Thousands separator character. Default: "" */
   thousandsSeparator?: string
   /** Static text before the value. Default: "" */
   prefix?: string
@@ -48,13 +66,12 @@ export type CountUpProps = {
   toLocaleStringOptions?: ToLocaleStringOptions
   /** On animation complete event handler */
   onComplete?: OnComplete
-  /**  Easing function to control how the animation is progressing */
-  easing?: (
-    currentTime: number,
-    startValue: number,
-    changeInValue: number,
-    duration: number
-  ) => number
+  /**  Easing function to control how the animation is progressing. Default: easeOutExpo */
+  easing?: Easing
   /** A function that formats the output value */
   formatter?: Formatter
+  /** Render function to render the count up value. Used by the component */
+  children?: (props: CountUpReturnProps) => ReturnValue
+  /** Auto reset animation when the key changes. It works similar to React's key prop */
+  autoResetKey?: AutoResetKey
 }

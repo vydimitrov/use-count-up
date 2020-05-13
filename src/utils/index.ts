@@ -1,4 +1,4 @@
-export { defaultEasing } from './defaultEasing'
+export { easings } from './easing'
 export { getReturnValue } from './getReturnValue'
 export {
   toLocaleStringSupports,

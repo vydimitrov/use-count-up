@@ -15,7 +15,7 @@ export const useFormattedValue = (
     formatter,
     decimalPlaces = 0,
     decimalSeparator = '.',
-    thousandsSeparator = ' ',
+    thousandsSeparator = '',
     prefix = '',
     suffix = '',
     shouldUseToLocaleString = false,

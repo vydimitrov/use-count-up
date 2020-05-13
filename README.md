@@ -57,7 +57,7 @@ The function takes two agruments and returns the value from the `formatter` meth
     }
   ) => number | string | node;
 ```
-### 1st agrument `isCounting: boolean`
+### 1st argument `isCounting: boolean`
 > Default: `isCounting = false`
 
 Toggle the counting animation. It can be used to start the animation when the elmenet enters the viewport. If `config.end`  is not provided, the animation will continue to `Infinity`.

@@ -30,15 +30,13 @@
   },
   "homepage": "https://github.com/vydimitrov/use-count-up#readme",
   "dependencies": {
-    "use-elapsed-time": "^1.2.1"
+    "use-elapsed-time": "^2.1.1"
   },
   "peerDependencies": {
-    "react": ">=16.8.0",
-    "prop-types": ">=15.7.1"
+    "prop-types": ">=15.7.1",
+    "react": ">=16.8.0"
   },
   "devDependencies": {
-    "react": "16.8.0",
-    "prop-types": "15.7.1",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.4.0",
     "@types/jest": "^25.1.4",
@@ -49,6 +47,8 @@
     "jest": "^25.2.1",
     "path": "^0.12.7",
     "prettier": "^1.19.1",
+    "prop-types": "15.7.1",
+    "react": "16.8.0",
     "react-test-renderer": "^16.8.0",
     "source-map-loader": "^0.2.4",
     "ts-jest": "^25.2.1",

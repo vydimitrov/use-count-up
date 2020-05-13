@@ -1,33 +1,26 @@
-import { useElapsedTime } from 'use-elapsed-time'
-import { CountUpProps } from '../types'
-import { defaultEasing } from '../utils'
+import { CountUpProps, Easing } from '../types'
+import { easings } from '../utils'
 
-export const useRawValue = ({
-  isCounting = false,
-  start = 0,
-  end,
-  duration,
-  easing = defaultEasing,
-  onComplete,
-}: CountUpProps) => {
-  const durationMilliseconds =
-    typeof duration === 'number' ? duration * 1000 : undefined
-  const elapsedTime = useElapsedTime(isCounting, {
-    durationMilliseconds,
-    onComplete,
-  })
-
-  if (durationMilliseconds === 0 && typeof end === 'number') {
-    return end
+const getEasingFun = (easing: Easing) => {
+  if (typeof easing === 'function') {
+    return easing
   }
 
-  if (
-    typeof end === 'number' &&
-    typeof durationMilliseconds === 'number' &&
-    typeof easing === 'function'
-  ) {
-    return easing(elapsedTime, start, end - start, durationMilliseconds)
+  return easings[easing] || easings.easeOutExpo
+}
+
+export const useRawValue = (
+  elapsedTime: number,
+  { start = 0, end, duration, easing = easings.easeOutExpo }: CountUpProps
+) => {
+  let rawValue = elapsedTime
+  const easingFn = getEasingFun(easing)
+
+  if (duration === 0 && typeof end === 'number') {
+    rawValue = end
+  } else if (typeof end === 'number' && typeof duration === 'number') {
+    rawValue = easingFn(elapsedTime, start, end - start, duration)
   }
 
-  return elapsedTime
+  return rawValue
 }
