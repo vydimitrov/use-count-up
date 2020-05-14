@@ -228,7 +228,7 @@ describe('when using the toLocalString', () => {
     expect(getByText('3,655.2')).toBeInTheDocument()
   })
 
-  it('should default to custom formating options when toLocalString locales or options are not supported', () => {
+  it('should default to custom formating options with fallback suffix and prefix when toLocalString locales or options are not supported', () => {
     Object.defineProperty(global.Intl, 'NumberFormat', {
       value: undefined,
       configurable: true,
@@ -243,9 +243,11 @@ describe('when using the toLocalString', () => {
         thousandsSeparator=" "
         decimalSeparator="."
         decimalPlaces={2}
+        fallbackPrefix="$"
+        fallbackSuffix=" left"
       />
     )
 
-    expect(getByText('3 655.22')).toBeInTheDocument()
+    expect(getByText('$3 655.22 left')).toBeInTheDocument()
   })
 })

@@ -25,5 +25,5 @@ export const getEasing = (easing: Easing) => {
     return easing
   }
 
-  return easings[easing] || defaultEasing
+  return easings[easing]
 }

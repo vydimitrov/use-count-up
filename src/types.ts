@@ -64,6 +64,10 @@ export type CountUpProps = {
   toLocaleStringLocale?: ToLocaleStringLocales
   /** set the toLocaleString options */
   toLocaleStringOptions?: ToLocaleStringOptions
+  /** Static text before the value to be used in case toLocaleString params are not supported. Default: "" */
+  fallbackPrefix?: string
+  /** Static text after the value to be used in case toLocaleString params are not supported. Default: "" */
+  fallbackSuffix?: string
   /** On animation complete event handler */
   onComplete?: OnComplete
   /**  Easing function to control how the animation is progressing. Default: easeOutExpo */

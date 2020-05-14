@@ -1,6 +1,6 @@
-export const toLocaleStringSupportsLocales = () => {
-  var number = 0
+const toLocaleStringSupportsLocales = () => {
   try {
+    const number = 0
     number.toLocaleString('i')
   } catch (e) {
     return e.name === 'RangeError'
@@ -8,10 +8,17 @@ export const toLocaleStringSupportsLocales = () => {
   return false
 }
 
-export const toLocaleStringSupportsOptions = () => {
+const toLocaleStringSupportsOptions = () => {
   return !!(
-    typeof Intl == 'object' &&
+    typeof Intl === 'object' &&
     Intl &&
-    typeof Intl.NumberFormat == 'function'
+    typeof Intl.NumberFormat === 'function'
   )
+}
+
+export const getToLocaleStringParamsSupport = () => {
+  const areLocalesSupported = toLocaleStringSupportsLocales()
+  const areOptionsSupported = toLocaleStringSupportsOptions()
+
+  return areLocalesSupported && areOptionsSupported
 }
