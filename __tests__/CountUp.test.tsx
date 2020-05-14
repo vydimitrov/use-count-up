@@ -1,9 +1,8 @@
 import React from 'react'
 import { render } from '@testing-library/react'
-import { renderHook, act } from '@testing-library/react-hooks'
 import '@testing-library/jest-dom/extend-expect'
 
-import { CountUp, useCountUp } from '../src'
+import { CountUp } from '../src'
 
 const useElapsedTime = require('use-elapsed-time')
 
@@ -72,7 +71,7 @@ describe('functional tests', () => {
   })
 })
 
-describe('when returning data from hooks and component', () => {
+describe('when using the component with children as a render prop', () => {
   const reset = jest.fn()
   beforeEach(() => {
     useElapsedTime.__setElapsedTime(17.345)
@@ -82,7 +81,7 @@ describe('when returning data from hooks and component', () => {
     useElapsedTime.__resetResetMethod()
   })
 
-  it('should pass the current count up value and reset method to the Component children render prop', () => {
+  it('should pass the current count up value and reset method to children render function', () => {
     const children = jest.fn()
     render(
       <CountUp {...fixture} start={43.67}>
@@ -91,12 +90,6 @@ describe('when returning data from hooks and component', () => {
     )
 
     expect(children).toHaveBeenCalledWith({ value: '3683', reset })
-  })
-
-  it('should return an object with current count up value and reset method the hook', () => {
-    const { result } = renderHook(() => useCountUp(fixture))
-
-    expect(result.current).toEqual({ value: '3683', reset })
   })
 })
 
