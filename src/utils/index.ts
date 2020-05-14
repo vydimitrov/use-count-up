@@ -1,7 +1,5 @@
-export { easings } from './easing'
-export { getReturnValue } from './getReturnValue'
+export { easings, getEasing, defaultEasing } from './easing'
 export {
-  toLocaleStringSupports,
   toLocaleStringSupportsLocales,
   toLocaleStringSupportsOptions,
 } from './toLocaleStringSupport'

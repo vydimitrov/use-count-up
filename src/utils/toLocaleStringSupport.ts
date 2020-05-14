@@ -1,5 +1,3 @@
-export const toLocaleStringSupports = () => 'toLocaleString' in Number
-
 export const toLocaleStringSupportsLocales = () => {
   var number = 0
   try {

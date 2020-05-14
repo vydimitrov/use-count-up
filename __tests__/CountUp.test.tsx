@@ -1,0 +1,251 @@
+import React from 'react'
+import { render } from '@testing-library/react'
+import { renderHook, act } from '@testing-library/react-hooks'
+import '@testing-library/jest-dom/extend-expect'
+
+import { CountUp, useCountUp } from '../src'
+
+const useElapsedTime = require('use-elapsed-time')
+
+const fixture = {
+  isCounting: false,
+  duration: 10,
+  end: 3684,
+}
+
+afterEach(() => {
+  useElapsedTime.__resetElapsedTime()
+})
+
+describe('functional tests', () => {
+  it('should return the end value if duration is set to 0', () => {
+    const { getByText } = render(<CountUp {...fixture} duration={0} />)
+
+    expect(getByText('3684')).toBeInTheDocument()
+  })
+
+  it('should use the default duration if it is not provided', () => {
+    useElapsedTime.__setElapsedTime(2)
+    const { getByText } = render(<CountUp {...fixture} duration={undefined} />)
+
+    expect(getByText('3684')).toBeInTheDocument()
+  })
+
+  it('should return the elapsed time from the start if end value is not provided', () => {
+    useElapsedTime.__setElapsedTime(17.345)
+    const { getByText } = render(
+      <CountUp {...fixture} end={undefined} start={43.67} />
+    )
+
+    expect(getByText('61')).toBeInTheDocument()
+  })
+
+  it('should pass isCounting to useElapsedTime hook', () => {
+    const isCounting = true
+
+    render(<CountUp {...fixture} isCounting={isCounting} />)
+
+    expect(useElapsedTime.__getIsPlaying()).toBe(isCounting)
+    useElapsedTime.__resetIsPlaying()
+  })
+
+  it('should pass config options to useElapsedTime hook', () => {
+    const onComplete = jest.fn()
+    const autoResetKey = '100'
+
+    render(
+      <CountUp
+        {...fixture}
+        onComplete={onComplete}
+        autoResetKey={autoResetKey}
+      />
+    )
+
+    expect(useElapsedTime.__getConfig()).toEqual({
+      duration: 10,
+      onComplete,
+      autoResetKey,
+    })
+
+    useElapsedTime.__resetIsPlaying()
+    useElapsedTime.__resetConfig()
+  })
+})
+
+describe('when returning data from hooks and component', () => {
+  const reset = jest.fn()
+  beforeEach(() => {
+    useElapsedTime.__setElapsedTime(17.345)
+    useElapsedTime.__setResetMethod(reset)
+  })
+  afterEach(() => {
+    useElapsedTime.__resetResetMethod()
+  })
+
+  it('should pass the current count up value and reset method to the Component children render prop', () => {
+    const children = jest.fn()
+    render(
+      <CountUp {...fixture} start={43.67}>
+        {children}
+      </CountUp>
+    )
+
+    expect(children).toHaveBeenCalledWith({ value: '3683', reset })
+  })
+
+  it('should return an object with current count up value and reset method the hook', () => {
+    const { result } = renderHook(() => useCountUp(fixture))
+
+    expect(result.current).toEqual({ value: '3683', reset })
+  })
+})
+
+describe('easing testing', () => {
+  it('should use the custom easing function when it is provided', () => {
+    useElapsedTime.__setElapsedTime(5)
+
+    const easingReturnValue = '45687'
+    const easing = jest.fn().mockReturnValue(easingReturnValue)
+    const { getByText } = render(<CountUp {...fixture} easing={easing} />)
+
+    expect(getByText(easingReturnValue)).toBeInTheDocument()
+    expect(easing).toHaveBeenCalledWith(5, 0, 3684, 10)
+  })
+
+  it.each`
+    easing           | midValue
+    ${'easeOutExpo'} | ${'3570'}
+    ${'easeInExpo'}  | ${'159'}
+    ${'linear'}      | ${'1865'}
+  `(
+    'should return the correct start, mid and end values when the easing is set to $easing',
+    ({ easing, midValue }) => {
+      useElapsedTime.__setElapsedTime(0)
+
+      const getComponent = () => (
+        <CountUp {...fixture} start={46} easing={easing} />
+      )
+
+      const { getByText, rerender } = render(getComponent())
+
+      expect(getByText('46')).toBeInTheDocument()
+
+      useElapsedTime.__setElapsedTime(5)
+      rerender(getComponent())
+      expect(getByText(midValue)).toBeInTheDocument()
+
+      useElapsedTime.__setElapsedTime(10)
+      rerender(getComponent())
+      expect(getByText('3684')).toBeInTheDocument()
+    }
+  )
+})
+
+describe('when formatting the number', () => {
+  it('should remove all decimal places by default', () => {
+    useElapsedTime.__setElapsedTime(6.789412)
+    const { getByText } = render(<CountUp {...fixture} />)
+
+    expect(getByText('3650')).toBeInTheDocument()
+  })
+
+  it('should add "." as decimal separator by default', () => {
+    useElapsedTime.__setElapsedTime(6.789412)
+    const { getByText } = render(<CountUp {...fixture} decimalPlaces={2} />)
+
+    expect(getByText('3650.70')).toBeInTheDocument()
+  })
+
+  it('should use decimal and thousand separators if there are provided', () => {
+    useElapsedTime.__setElapsedTime(6.789412)
+    const { getByText } = render(
+      <CountUp
+        {...fixture}
+        decimalPlaces={2}
+        decimalSeparator=","
+        thousandsSeparator=" "
+      />
+    )
+
+    expect(getByText('3 650,70')).toBeInTheDocument()
+  })
+
+  it('should add prefix when provided', () => {
+    useElapsedTime.__setElapsedTime(6.789412)
+    const { getByText } = render(<CountUp {...fixture} prefix="£" />)
+
+    expect(getByText('£3650')).toBeInTheDocument()
+  })
+
+  it('should add suffix when provided', () => {
+    useElapsedTime.__setElapsedTime(6.789412)
+    const { getByText } = render(<CountUp {...fixture} suffix=" left" />)
+
+    expect(getByText('3650 left')).toBeInTheDocument()
+  })
+
+  it('should prefer custom formatter to toLocalString', () => {
+    const formatter = jest.fn().mockReturnValueOnce('12.765')
+    useElapsedTime.__setElapsedTime(7)
+    const { getByText } = render(
+      <CountUp {...fixture} formatter={formatter} shouldUseToLocaleString />
+    )
+
+    expect(getByText('12.765')).toBeInTheDocument()
+    expect(formatter).toHaveBeenCalledWith(3655.21875)
+  })
+})
+
+describe('when using the toLocalString', () => {
+  it('should use toLocalString when it is supported without params', () => {
+    useElapsedTime.__setElapsedTime(7)
+    const { getByText } = render(
+      <CountUp {...fixture} shouldUseToLocaleString />
+    )
+
+    expect(getByText('3,655.219')).toBeInTheDocument()
+  })
+
+  it('should use toLocalString when it is supported with locale', () => {
+    useElapsedTime.__setElapsedTime(7)
+    const { getByText } = render(
+      <CountUp {...fixture} shouldUseToLocaleString toLocaleStringLocale="de" />
+    )
+
+    expect(getByText('3.655,219')).toBeInTheDocument()
+  })
+
+  it('should use toLocalString when it is supported with options', () => {
+    useElapsedTime.__setElapsedTime(7)
+    const { getByText } = render(
+      <CountUp
+        {...fixture}
+        shouldUseToLocaleString
+        toLocaleStringOptions={{ maximumFractionDigits: 1 }}
+      />
+    )
+
+    expect(getByText('3,655.2')).toBeInTheDocument()
+  })
+
+  it('should default to custom formating options when toLocalString locales or options are not supported', () => {
+    Object.defineProperty(global.Intl, 'NumberFormat', {
+      value: undefined,
+      configurable: true,
+    })
+    useElapsedTime.__setElapsedTime(7)
+
+    const { getByText } = render(
+      <CountUp
+        {...fixture}
+        shouldUseToLocaleString
+        toLocaleStringOptions={{ maximumFractionDigits: 2 }}
+        thousandsSeparator=" "
+        decimalSeparator="."
+        decimalPlaces={2}
+      />
+    )
+
+    expect(getByText('3 655.22')).toBeInTheDocument()
+  })
+})

@@ -8,20 +8,20 @@ export type ReturnValue = number | string | React.ReactNode
 export type Formatter = (value: number) => ReturnValue
 export type ToLocaleStringLocales = string | string[]
 export type ToLocaleStringOptions = {
-  localeMatcher: string
-  style: string
-  numberingSystem: string
-  unit: string
-  unitDisplay: string
-  currency: string
-  currencyDisplay: string
-  useGrouping: boolean
-  minimumIntegerDigits: number
-  minimumFractionDigits: number
-  maximumFractionDigits: number
-  minimumSignificantDigits: number
-  maximumSignificantDigits: number
-  notation: string
+  localeMatcher?: string
+  style?: string
+  numberingSystem?: string
+  unit?: string
+  unitDisplay?: string
+  currency?: string
+  currencyDisplay?: string
+  useGrouping?: boolean
+  minimumIntegerDigits?: number
+  minimumFractionDigits?: number
+  maximumFractionDigits?: number
+  minimumSignificantDigits?: number
+  maximumSignificantDigits?: number
+  notation?: string
 }
 
 export type EasingFn = (
@@ -46,7 +46,7 @@ export type CountUpProps = {
   start?: number
   /** Target value */
   end?: number
-  /** Animation duration in seconds */
+  /** Animation duration in seconds. Default: 2 */
   duration?: number
   /** Number of decimal places after the decimal separator. Default: 0 */
   decimalPlaces?: number

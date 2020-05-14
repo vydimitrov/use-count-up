@@ -1,7 +1,6 @@
 import { useMemo } from 'react'
 import { CountUpProps } from '../types'
 import {
-  toLocaleStringSupports,
   toLocaleStringSupportsLocales,
   toLocaleStringSupportsOptions,
 } from '../utils'
@@ -27,11 +26,10 @@ export const useFormattedValue = (
     useToLocaleStringWithoutParams,
     useToLocaleStringWithParams,
   } = useMemo(() => {
-    const isSupported = toLocaleStringSupports()
     let useToLocaleStringWithParams = false
     let useToLocaleStringWithoutParams = false
 
-    if (shouldUseToLocaleString && isSupported) {
+    if (shouldUseToLocaleString) {
       const hasParams =
         typeof toLocaleStringLocale !== 'undefined' ||
         typeof toLocaleStringOptions !== 'undefined'
