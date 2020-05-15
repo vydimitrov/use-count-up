@@ -46,7 +46,7 @@ export type CountUpProps = {
   start?: number
   /** Target value */
   end?: number
-  /** Animation duration in seconds. Default: 2 */
+  /** Animation duration in seconds. Default to 2 if end is set*/
   duration?: number
   /** Number of decimal places after the decimal separator. Default: 0 */
   decimalPlaces?: number
@@ -58,11 +58,11 @@ export type CountUpProps = {
   prefix?: string
   /** Static text after the value. Default: "" */
   suffix?: string
-  /** Use toLocaleString if it is supported. Default: false */
+  /** Indicates if toLocaleString should be used. Default: false */
   shouldUseToLocaleString?: boolean
-  /** set the toLocaleString locale */
+  /** Set the toLocaleString locale */
   toLocaleStringLocale?: ToLocaleStringLocales
-  /** set the toLocaleString options */
+  /** Set the toLocaleString options */
   toLocaleStringOptions?: ToLocaleStringOptions
   /** Static text before the value to be used in case toLocaleString params are not supported. Default: "" */
   fallbackPrefix?: string
@@ -72,7 +72,7 @@ export type CountUpProps = {
   onComplete?: OnComplete
   /**  Easing function to control how the animation is progressing. Default: easeOutExpo */
   easing?: Easing
-  /** A function that formats the output value */
+  /** Function that formats the output value */
   formatter?: Formatter
   /** Render function to render the count up value. Used by the component */
   children?: (props: CountUpReturnProps) => ReturnValue
