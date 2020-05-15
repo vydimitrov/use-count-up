@@ -101,6 +101,8 @@ const MyComponent = () => {
 | children                | ({ value: number, reset: number }) => number \| string \| node                       | -                         | Render function to render the count up value. Used only by the component                                                                                                                                                           |
 | autoResetKey            | number \| string                                                                     | -                         | Auto reset animation when the key changes. Works similar to React `key` prop                                                                                                                                                       |
 
+## Return values
+
 The hook returns the current count up value and reset method to reset the animation.
 
 ```jsx
