@@ -17,6 +17,8 @@
   </p>
 </div>
 
+<hr />
+
 - Build-in support for `toLocaleString` with fallback options
 - Declarative API (no more imperative calls to `start()` and `update()`)
 - Built with TypeScript
