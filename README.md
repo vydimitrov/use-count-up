@@ -12,6 +12,9 @@
   <a href="https://bundlephobia.com/result?p=use-count-up">
     <img alt="Bundle Size" src="https://img.shields.io/bundlephobia/min/use-count-up" />
   </a>
+
+  <br />
+
   <p>
     React/React Native component and hook to animate counting up or down to a number or infinity
   </p>
