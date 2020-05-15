@@ -21,8 +21,9 @@
 
 <hr />
 
-- Build-in support for `toLocaleString` with fallback options
-- Declarative API (no more imperative calls to `start()` and `update()`)
+- Lightweight implementation comparing to [similar solutions](https://bundlephobia.com/scan-results?packages=use-count-up,react-countup)
+- Support `toLocaleString` with fallback options
+- Declarative API _(no more imperative calls to `start()` and `update()`)_
 - Built with TypeScript
 
 ## Installation
@@ -37,91 +38,41 @@ Check the demo on CodeSandbox to get started
 
 [![Edit aged-monad-0mrfu](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/aged-monad-0mrfu?fontsize=14)
 
-## Basic usage
+## Component basic usage
+
+```jsx
+import { CountUp } from 'use-count-up'
+
+const MyComponent = () => <CountUp isCounting end={1320} duration={3.2} />
+```
+
+The `CountUp` component should be wrapped in `Text` component when used in React Native project, like so
+
+```jsx
+import { Text } from 'react-native'
+import { CountUp } from 'use-count-up'
+
+const MyComponent = () => (
+  <Text>
+    <CountUp isCounting end={1320} duration={3.2} />
+  </Text>
+)
+```
+
+## Hook basic usage
+
+The hook accepts the same properties as the component. The usage for React and React Native is the same.
 
 ```jsx
 import { useCountUp } from 'use-count-up'
 
-const isCounting = true
-const config = {
-  start: 450,
-  end: 1320,
-  duration: 3.2,
-  formatter: (value) => `${Math.ceil(value)}$`,
-}
-
 const MyComponent = () => {
-  const value = useCountUp(isCounting, config)
+  const { value } = useCountUp({
+    isCounting: true,
+    end: 1320,
+    duration: 3.2,
+  })
+
   return value
 }
 ```
-
-## Function signature
-
-The function takes two agruments and returns the value from the `formatter` method.
-
-```js
-  function useCountUp(
-    isCounting: boolean,
-    config?: {
-      start?: number,
-      end?: number,
-      duration?: number,
-      onComplete?: () => undefined | [shouldRepeat: boolean, delay: number],
-      easing?: (t: number, b: number, c: number, d: number) => number,
-      formatter?: (value: number) => number | string | node,
-    }
-  ) => number | string | node;
-```
-
-### 1st argument `isCounting: boolean`
-
-> Default: `isCounting = false`
-
-Toggle the counting animation. It can be used to start the animation when the elmenet enters the viewport. If `config.end` is not provided, the animation will continue to `Infinity`.
-
-### 2nd argument `config: object`
-
-> Default: `config = {}`
-
-Optional configuration object with the following properties and methods:
-
-#### `start: number`
-
-> Default: `start = 0`
-
-Initial value.
-
-#### `end: number`
-
-> Default: `end = undefined`
-
-Target value.
-
-#### `duration: number`
-
-> Default: `duration = undefined`
-
-Animation duration in seconds. Example: `3`, `4.2`, `0.5`
-
-#### `onComplete: () => undefined | [shouldRepeat: boolean, delay: number]`
-
-> Default: `onComplete = undefined`
-
-On animation complete event handler. It can be used to restart the animation by returning an array where the first element `shouldRepeat` indicates if the loop should start over and second element `delay` specifies the delay before looping again in milliseconds.
-
-#### `easing: (t: number, b: number, c: number, d: number) => number,`
-
-> Default: `easing = (t, b, c, d) => { t /= d; t--; return c*(t*t*t*t*t + 1) + b; }` // easeOutQuint
-
-`t` - current time  
-`b` - start value  
-`c` - change in value  
-`d` - duration  
-Easing function to control how the animation is progressing. [There are a bunch of functions](http://www.gizma.com/easing/) that can be used to change that behaviour.
-
-#### `formatter: (value: number) => number | string | node`
-
-> Default: `formatter = value => Math.round(value)`
-
-A function that formats the output value. It can be used to add prefix or suffix to the value. A good formatting option is to use [`toLocaleString`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/toLocaleString), which will give the correct decimal and thousand separators.
