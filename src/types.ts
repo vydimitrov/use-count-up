@@ -30,7 +30,7 @@ export type EasingFn = (
   changeInValue: number,
   duration: number
 ) => number
-export type Easing = 'easeOutExpo' | 'easeInExpo' | 'linear' | EasingFn
+export type Easing = 'easeOutCubic' | 'easeInCubic' | 'linear' | EasingFn
 
 export type CountUpReturnProps = {
   /** Current value of the count up animation */

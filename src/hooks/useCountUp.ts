@@ -34,9 +34,13 @@ const useCountUp = (props: CountUpProps): CountUpReturnProps => {
 
   let rawValue
 
-  if (typeof end === 'number' && typeof durationValue === 'number') {
+  if (durationValue === 0 && typeof end === 'number') {
+    rawValue = end
+  } else if (typeof end === 'number' && typeof durationValue === 'number') {
     const easingFn = getEasing(easing)
-    rawValue = easingFn(elapsedTime, start, end - start, durationValue)
+    // elapsedTime should always be less or equal to the durationValue
+    const time = elapsedTime < durationValue ? elapsedTime : durationValue
+    rawValue = easingFn(time, start, end - start, durationValue)
   } else {
     rawValue = start + elapsedTime
   }

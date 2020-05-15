@@ -1,11 +1,14 @@
 import { Easing } from '../types'
 
-const easeOutExpo = (t: number, b: number, c: number, d: number): number => {
-  return t === d ? b + c : c * (-Math.pow(2, (-10 * t) / d) + 1) + b
+const easeOutCubic = (t: number, b: number, c: number, d: number): number => {
+  t /= d
+  t--
+  return c * (t * t * t + 1) + b
 }
 
-const easeInExpo = (t: number, b: number, c: number, d: number): number => {
-  return t === 0 ? b : c * Math.pow(2, 10 * (t / d - 1)) + b
+const easeInCubic = (t: number, b: number, c: number, d: number): number => {
+  t /= d
+  return c * t * t * t + b
 }
 
 const linear = (t: number, b: number, c: number, d: number): number => {
@@ -13,17 +16,12 @@ const linear = (t: number, b: number, c: number, d: number): number => {
 }
 
 export const easings = {
-  easeInExpo,
-  easeOutExpo,
+  easeInCubic,
+  easeOutCubic,
   linear,
 }
 
-export const defaultEasing = easings.easeOutExpo
+export const defaultEasing = easings.easeOutCubic
 
-export const getEasing = (easing: Easing) => {
-  if (typeof easing === 'function') {
-    return easing
-  }
-
-  return easings[easing]
-}
+export const getEasing = (easing: Easing) =>
+  typeof easing === 'function' ? easing : easings[easing]

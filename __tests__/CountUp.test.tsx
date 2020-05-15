@@ -23,6 +23,13 @@ describe('functional tests', () => {
     expect(getByText('3684')).toBeInTheDocument()
   })
 
+  it('should return the end value when the duration is set to be less than the elapsed time', () => {
+    useElapsedTime.__setElapsedTime(17)
+    const { getByText } = render(<CountUp {...fixture} duration={0} />)
+
+    expect(getByText('3684')).toBeInTheDocument()
+  })
+
   it('should use the default duration if it is not provided', () => {
     useElapsedTime.__setElapsedTime(2)
     const { getByText } = render(<CountUp {...fixture} duration={undefined} />)
@@ -74,7 +81,7 @@ describe('functional tests', () => {
 describe('when using the component with children as a render prop', () => {
   const reset = jest.fn()
   beforeEach(() => {
-    useElapsedTime.__setElapsedTime(17.345)
+    useElapsedTime.__setElapsedTime(7.345)
     useElapsedTime.__setResetMethod(reset)
   })
   afterEach(() => {
@@ -89,7 +96,7 @@ describe('when using the component with children as a render prop', () => {
       </CountUp>
     )
 
-    expect(children).toHaveBeenCalledWith({ value: '3683', reset })
+    expect(children).toHaveBeenCalledWith({ value: '3615', reset })
   })
 })
 
@@ -106,10 +113,10 @@ describe('easing testing', () => {
   })
 
   it.each`
-    easing           | midValue
-    ${'easeOutExpo'} | ${'3570'}
-    ${'easeInExpo'}  | ${'159'}
-    ${'linear'}      | ${'1865'}
+    easing            | midValue
+    ${'easeOutCubic'} | ${'3229'}
+    ${'easeInCubic'}  | ${'500'}
+    ${'linear'}       | ${'1865'}
   `(
     'should return the correct start, mid and end values when the easing is set to $easing',
     ({ easing, midValue }) => {
@@ -139,14 +146,14 @@ describe('when formatting the number', () => {
     useElapsedTime.__setElapsedTime(6.789412)
     const { getByText } = render(<CountUp {...fixture} />)
 
-    expect(getByText('3650')).toBeInTheDocument()
+    expect(getByText('3562')).toBeInTheDocument()
   })
 
   it('should add "." as decimal separator by default', () => {
     useElapsedTime.__setElapsedTime(6.789412)
     const { getByText } = render(<CountUp {...fixture} decimalPlaces={2} />)
 
-    expect(getByText('3650.70')).toBeInTheDocument()
+    expect(getByText('3562.08')).toBeInTheDocument()
   })
 
   it('should use decimal and thousand separators if there are provided', () => {
@@ -160,32 +167,32 @@ describe('when formatting the number', () => {
       />
     )
 
-    expect(getByText('3 650,70')).toBeInTheDocument()
+    expect(getByText('3 562,08')).toBeInTheDocument()
   })
 
   it('should add prefix when provided', () => {
     useElapsedTime.__setElapsedTime(6.789412)
     const { getByText } = render(<CountUp {...fixture} prefix="£" />)
 
-    expect(getByText('£3650')).toBeInTheDocument()
+    expect(getByText('£3562')).toBeInTheDocument()
   })
 
   it('should add suffix when provided', () => {
     useElapsedTime.__setElapsedTime(6.789412)
     const { getByText } = render(<CountUp {...fixture} suffix=" left" />)
 
-    expect(getByText('3650 left')).toBeInTheDocument()
+    expect(getByText('3562 left')).toBeInTheDocument()
   })
 
   it('should prefer custom formatter to toLocalString', () => {
     const formatter = jest.fn().mockReturnValueOnce('12.765')
-    useElapsedTime.__setElapsedTime(7)
+    useElapsedTime.__setElapsedTime(7.4)
     const { getByText } = render(
       <CountUp {...fixture} formatter={formatter} shouldUseToLocaleString />
     )
 
     expect(getByText('12.765')).toBeInTheDocument()
-    expect(formatter).toHaveBeenCalledWith(3655.21875)
+    expect(formatter).toHaveBeenCalledWith(3619.250016)
   })
 })
 
@@ -196,7 +203,7 @@ describe('when using the toLocalString', () => {
       <CountUp {...fixture} shouldUseToLocaleString />
     )
 
-    expect(getByText('3,655.219')).toBeInTheDocument()
+    expect(getByText('3,584.532')).toBeInTheDocument()
   })
 
   it('should use toLocalString when it is supported with locale', () => {
@@ -205,7 +212,7 @@ describe('when using the toLocalString', () => {
       <CountUp {...fixture} shouldUseToLocaleString toLocaleStringLocale="de" />
     )
 
-    expect(getByText('3.655,219')).toBeInTheDocument()
+    expect(getByText('3.584,532')).toBeInTheDocument()
   })
 
   it('should use toLocalString when it is supported with options', () => {
@@ -218,7 +225,7 @@ describe('when using the toLocalString', () => {
       />
     )
 
-    expect(getByText('3,655.2')).toBeInTheDocument()
+    expect(getByText('3,584.5')).toBeInTheDocument()
   })
 
   it('should default to custom formating options with fallback suffix and prefix when toLocalString locales or options are not supported', () => {
@@ -241,6 +248,6 @@ describe('when using the toLocalString', () => {
       />
     )
 
-    expect(getByText('$3 655.22 left')).toBeInTheDocument()
+    expect(getByText('$3 584.53 left')).toBeInTheDocument()
   })
 })

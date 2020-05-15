@@ -13,7 +13,7 @@ const fixture = {
 describe('useCountUp return value', () => {
   const reset = jest.fn()
   beforeEach(() => {
-    useElapsedTime.__setElapsedTime(17.345)
+    useElapsedTime.__setElapsedTime(7.345)
     useElapsedTime.__setResetMethod(reset)
   })
   afterEach(() => {
@@ -23,6 +23,6 @@ describe('useCountUp return value', () => {
   it('should return an object with current count up value and reset method', () => {
     const { result } = renderHook(() => useCountUp(fixture))
 
-    expect(result.current).toEqual({ value: '3683', reset })
+    expect(result.current).toEqual({ value: '3615', reset })
   })
 })
