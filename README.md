@@ -86,7 +86,7 @@ const MyComponent = () => {
 | **end**                     | number                                                                               | -            | Target value                                                                                                                                                                                                                           |
 | **duration**                | number                                                                               | -            | Animation duration in seconds. Defaults to 2 seconds if `end` is set. If `end` isn't set the animation will continue to Infinity.                                                                                                      |
 | **decimalPlaces**           | number                                                                               | 0            | Number of decimal places after the decimal separator                                                                                                                                                                                   |
-| **decimalSeparator**        | string                                                                               | .            | Decimal separator character                                                                                                                                                                                                            |
+| **decimalSeparator**        | string                                                                               | -            | Decimal separator character                                                                                                                                                                                                            |
 | **thousandsSeparator**      | string                                                                               | -            | Thousands separator character                                                                                                                                                                                                          |
 | **prefix**                  | string                                                                               | -            | Static text before the value                                                                                                                                                                                                           |
 | **suffix**                  | string                                                                               | -            | Static text after the value                                                                                                                                                                                                            |
@@ -118,4 +118,46 @@ import { CountUp } from 'use-count-up'
 const MyComponent = () => (
   <CountUp isCounting>{({ value, reset }) => value}</CountUp>
 )
+```
+
+## Why to use `toLocaleString`?
+
+Number formatting varies per language group. For example, the number `3842.45` in German will be formatted as `3.842,45` whereas in British English will be `3,842.45` (spot the different decimal and thousands separators). `Number.toLocaleString()` is a [built-in JS method](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/toLocaleString) that returns a string with a language-sensitive representation of this number. The basic implementation of the method will detect the default locale that is set up on the user's computer and will format the number accordingly. The browser support for `toLocaleString` [is incredibly good!](https://caniuse.com/#search=number%20toLocaleString).
+
+If you expect variance in the geographical/country distribution of your users, then this is a must. The simplest way to use `toLocaleString` with the Count up component or hook is to pass `shouldUseToLocaleString: true` like so:
+
+```jsx
+import { CountUp } from 'use-count-up'
+
+const MyComponent = () => (
+  <CountUp isCounting end={1320} duration={3.2} shouldUseToLocaleString />
+)
+```
+
+`toLocaleString` method accepts [two parameters](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat) `locale` and `options`, which allows further customization of the number value. Setting up the first parameter `locale` allows the use of a specific locale and fallback option if the first one is not supported. The second parameter `options` will let you format the value in a custom way. For example, you may choose to add a min and max number of decimal places, or set currency.
+
+Keep in mind though that `locale` and `options` arguments are [not supported in all browsers yet](https://caniuse.com/#feat=mdn-javascript_builtins_number_tolocalestring_locales). Despite that, this library offers fallback options in case of browser support issues. This can be set like so:
+
+```jsx
+import { useCountUp } from 'use-count-up'
+
+const MyComponent = () => {
+  const { value } = useCountUp({
+    isCounting: true,
+    end: 1320,
+    duration: 3.2,
+    shouldUseToLocaleString: true,
+    toLocaleStringParams: {
+      locale: 'de-DE',
+      options: { style: 'currency', currency: 'EUR', maximumFractionDigits: 2 },
+    },
+    // fallback options
+    decimalPlaces: 2,
+    decimalSeparator: ',',
+    thousandsSeparator: '.',
+    fallbackSuffix: '€',
+  })
+
+  return value
+}
 ```
