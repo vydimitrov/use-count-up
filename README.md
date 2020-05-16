@@ -21,7 +21,7 @@
 
 <hr />
 
-- Lightweight implementation comparing to [similar solutions](https://bundlephobia.com/scan-results?packages=use-count-up,react-countup)
+- Lighter implementation and smaller bundle size comparing to [similar solutions](https://bundlephobia.com/scan-results?packages=use-count-up,react-countup)
 - Support `toLocaleString` with fallback options
 - Declarative API _(no more imperative calls to `start()` and `update()`)_
 - Built with TypeScript
@@ -91,8 +91,7 @@ const MyComponent = () => {
 | prefix                  | string                                                                               | -            | Static text before the value                                                                                                                                                                                                       |
 | suffix                  | string                                                                               | -            | Static text after the value                                                                                                                                                                                                        |
 | shouldUseToLocaleString | boolean                                                                              | false        | Indicates if `toLocaleString` should be used                                                                                                                                                                                       |
-| toLocaleStringLocale    | string \| string[]                                                                   | -            | Set the `toLocaleString` locale. [Check all locales here](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat)                                                         |
-| toLocaleStringOptions   | object                                                                               | -            | Set the `toLocaleString` options. [Check all options here](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat)                                                        |
+| toLocaleStringParams    | { locale, options }                                                                  | -            | Set `toLocaleString` locale and/or options. [Read more here](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat)                                                      |
 | fallbackPrefix          | string                                                                               | -            | Static text before the value to be used in case toLocaleString params are not supported                                                                                                                                            |
 | fallbackSuffix          | string                                                                               | -            | Static text after the value to be used in case toLocaleString params are not supported                                                                                                                                             |
 | onComplete              | (): void \| {shouldRepeat: boolean, delay: number}                                   | -            | On complete handler. It can be used to repeat the animation by returning an object with following props: `shouldRepeat` indicates if the animation should start over; `delay` specifies the delay before looping again in seconds. |

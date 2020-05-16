@@ -23,6 +23,10 @@ export type ToLocaleStringOptions = {
   maximumSignificantDigits?: number
   notation?: string
 }
+export type ToLocaleStringParams = {
+  locale?: ToLocaleStringLocales
+  options?: ToLocaleStringOptions
+}
 
 export type EasingFn = (
   currentTime: number,
@@ -60,10 +64,8 @@ export type CountUpProps = {
   suffix?: string
   /** Indicates if toLocaleString should be used. Default: false */
   shouldUseToLocaleString?: boolean
-  /** Set the toLocaleString locale */
-  toLocaleStringLocale?: ToLocaleStringLocales
-  /** Set the toLocaleString options */
-  toLocaleStringOptions?: ToLocaleStringOptions
+  /** Set the toLocaleString locale and options*/
+  toLocaleStringParams?: ToLocaleStringParams
   /** Static text before the value to be used in case toLocaleString params are not supported. Default: "" */
   fallbackPrefix?: string
   /** Static text after the value to be used in case toLocaleString params are not supported. Default: "" */

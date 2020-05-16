@@ -184,7 +184,7 @@ describe('when formatting the number', () => {
     expect(getByText('3562 left')).toBeInTheDocument()
   })
 
-  it('should prefer custom formatter to toLocalString', () => {
+  it('should prefer custom formatter to toLocaleString', () => {
     const formatter = jest.fn().mockReturnValueOnce('12.765')
     useElapsedTime.__setElapsedTime(7.4)
     const { getByText } = render(
@@ -196,8 +196,8 @@ describe('when formatting the number', () => {
   })
 })
 
-describe('when using the toLocalString', () => {
-  it('should use toLocalString when it is supported without params', () => {
+describe('when using the toLocaleString', () => {
+  it('should use toLocaleString when it is supported without params', () => {
     useElapsedTime.__setElapsedTime(7)
     const { getByText } = render(
       <CountUp {...fixture} shouldUseToLocaleString />
@@ -206,29 +206,33 @@ describe('when using the toLocalString', () => {
     expect(getByText('3,584.532')).toBeInTheDocument()
   })
 
-  it('should use toLocalString when it is supported with locale', () => {
-    useElapsedTime.__setElapsedTime(7)
-    const { getByText } = render(
-      <CountUp {...fixture} shouldUseToLocaleString toLocaleStringLocale="de" />
-    )
-
-    expect(getByText('3.584,532')).toBeInTheDocument()
-  })
-
-  it('should use toLocalString when it is supported with options', () => {
+  it('should use toLocaleString when it is supported with locale', () => {
     useElapsedTime.__setElapsedTime(7)
     const { getByText } = render(
       <CountUp
         {...fixture}
         shouldUseToLocaleString
-        toLocaleStringOptions={{ maximumFractionDigits: 1 }}
+        toLocaleStringParams={{ locale: 'de' }}
+      />
+    )
+
+    expect(getByText('3.584,532')).toBeInTheDocument()
+  })
+
+  it('should use toLocaleString when it is supported with options', () => {
+    useElapsedTime.__setElapsedTime(7)
+    const { getByText } = render(
+      <CountUp
+        {...fixture}
+        shouldUseToLocaleString
+        toLocaleStringParams={{ options: { maximumFractionDigits: 1 } }}
       />
     )
 
     expect(getByText('3,584.5')).toBeInTheDocument()
   })
 
-  it('should default to custom formating options with fallback suffix and prefix when toLocalString locales or options are not supported', () => {
+  it('should default to custom formating options with fallback suffix and prefix when toLocaleString locales or options are not supported', () => {
     Object.defineProperty(global.Intl, 'NumberFormat', {
       value: undefined,
       configurable: true,
@@ -239,7 +243,7 @@ describe('when using the toLocalString', () => {
       <CountUp
         {...fixture}
         shouldUseToLocaleString
-        toLocaleStringOptions={{ maximumFractionDigits: 2 }}
+        toLocaleStringParams={{ options: { maximumFractionDigits: 2 } }}
         thousandsSeparator=" "
         decimalSeparator="."
         decimalPlaces={2}

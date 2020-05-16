@@ -18,8 +18,7 @@ export const useFormattedValue = (
     prefix = '',
     suffix = '',
     shouldUseToLocaleString = false,
-    toLocaleStringLocale,
-    toLocaleStringOptions,
+    toLocaleStringParams,
     fallbackPrefix = '',
     fallbackSuffix = '',
   }: CountUpProps
@@ -43,22 +42,16 @@ export const useFormattedValue = (
 
   // second highest priority goes to toLocaleString
   if (shouldUseToLocaleString) {
-    const hasParams =
-      typeof toLocaleStringLocale !== 'undefined' ||
-      typeof toLocaleStringOptions !== 'undefined'
-
     // to toLocaleString has better support without params
-    if (!hasParams) {
+    if (typeof toLocaleStringParams === 'undefined') {
       const value = rawValue.toLocaleString()
       return addPrefixSuffix(prefix, value, suffix)
     }
 
     // use it with params if supported
     if (canUseLocaleParams) {
-      const value = rawValue.toLocaleString(
-        toLocaleStringLocale,
-        toLocaleStringOptions
-      )
+      const { locale, options } = toLocaleStringParams
+      const value = rawValue.toLocaleString(locale, options)
 
       return addPrefixSuffix(prefix, value, suffix)
     }
