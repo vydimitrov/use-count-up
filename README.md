@@ -136,7 +136,9 @@ const MyComponent = () => (
 
 `toLocaleString` method accepts [two parameters](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat), `locale` and `options`, which allows further customization of the number value. Setting up the first parameter, `locale`, allows the use of a specific locale and fallback option. The second parameter, `options`, will let you format the value in a custom way. For example, you may choose to add a min and max number of decimal places, or set currency.
 
-Keep in mind though that the `locale` and `options` arguments are [not supported in all browsers yet](https://caniuse.com/#feat=mdn-javascript_builtins_number_tolocalestring_locales). Despite that, the Count up library offers fallback options in case of browser support issues. This can be set like so:
+Keep in mind though that the `locale` and `options` arguments are [not supported in all browsers](https://caniuse.com/#feat=mdn-javascript_builtins_number_tolocalestring_locales). Despite that, the Count up library offers fallback options in case you need to support obsolete or niche browsers.
+
+Setting up `toLocaleString` params without fallback options:
 
 ```jsx
 import { useCountUp } from 'use-count-up'
@@ -149,6 +151,27 @@ const MyComponent = () => {
     //enable toLocaleString
     shouldUseToLocaleString: true,
     // set locale and options
+    toLocaleStringParams: {
+      locale: 'de-DE',
+      options: { style: 'currency', currency: 'EUR', maximumFractionDigits: 2 },
+    },
+  })
+
+  return value
+}
+```
+
+Setting up `toLocaleString` params with fallback options:
+
+```jsx
+import { useCountUp } from 'use-count-up'
+
+const MyComponent = () => {
+  const { value } = useCountUp({
+    isCounting: true,
+    end: 1320,
+    duration: 3.2,
+    shouldUseToLocaleString: true,
     toLocaleStringParams: {
       locale: 'de-DE',
       options: { style: 'currency', currency: 'EUR', maximumFractionDigits: 2 },
