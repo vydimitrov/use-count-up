@@ -29,14 +29,14 @@
 
 #### Table of contents
 
-- [Installation](#installation)
-- [Demo](#demo)
-- [Component basic usage](#component-basic-usage)
-- [Hook basic usage](#hook-basic-usage)
-- [Props](#props)
-- [Return values](#return-values)
-- [Why use toLocaleString](#why-use-toLocaleString)
-- [Recipes](#recipes)
+1. [Installation](#installation)
+2. [Demo](#demo)
+3. [Component basic usage](#component-basic-usage)
+4. [Hook basic usage](#hook-basic-usage)
+5. [Props](#props)
+6. [Return values](#return-values)
+7. [Why use toLocaleString](#why-use-toLocaleString)
+8. [Recipes](#recipes)
 
 ## Installation
 
