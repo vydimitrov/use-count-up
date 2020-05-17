@@ -27,15 +27,16 @@
 - React Native support for iOS and Android
 - Built with TypeScript
 
-## Table of contents
+#### Table of contents
 
-1. [Installation](#installation)
-2. [Demo](#demo)
-3. [Component basic usage](#component-basic-usage)
-4. [Hook basic usage](#hook-basic-usage)
-5. [Props](#props)
-6. [Why use toLocaleString](#why-use-toLocaleString)
-7. [Recipes](#recipes)
+- [Installation](#installation)
+- [Demo](#demo)
+- [Component basic usage](#component-basic-usage)
+- [Hook basic usage](#hook-basic-usage)
+- [Props](#props)
+- [Return values](#return-values)
+- [Why use toLocaleString](#why-use-toLocaleString)
+- [Recipes](#recipes)
 
 ## Installation
 
