@@ -232,21 +232,23 @@ describe('when using the toLocaleString', () => {
     expect(getByText('3,584.5')).toBeInTheDocument()
   })
 
-  it('should log an error if the provided locale is not correct', () => {
+  it('should log an error if the provided locale is not correct and use to fallback options', () => {
     const mockedConsoleError = jest.fn()
     global.console.error = mockedConsoleError
     useElapsedTime.__setElapsedTime(7)
-    render(
+    const { getByText } = render(
       <CountUp
         {...fixture}
         shouldUseToLocaleString
         toLocaleStringParams={{ locale: 'asdasdsad' }}
+        thousandsSeparator=" "
+        decimalSeparator="."
+        decimalPlaces={2}
       />
     )
 
-    expect(mockedConsoleError).toHaveBeenCalledWith(
-      'Invalid language tag: asdasdsad'
-    )
+    expect(mockedConsoleError).toHaveBeenCalled()
+    expect(getByText('3 584.53')).toBeInTheDocument()
   })
 
   it('should default to custom formating options with fallback suffix and prefix when toLocaleString locales or options are not supported', () => {
