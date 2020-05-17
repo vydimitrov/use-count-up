@@ -24,7 +24,18 @@
 - Lighter implementation and smaller bundle size [in comparison with similar solutions](https://bundlephobia.com/scan-results?packages=use-count-up,react-countup)
 - Support `toLocaleString` with fallback options
 - Declarative API _(no more imperative calls to `start()` and `update()`)_
+- React Native support for iOS and Android
 - Built with TypeScript
+
+## Table of contents
+
+1. [Installation](#installation)
+2. [Demo](#demo)
+3. [Component basic usage](#component-basic-usage)
+4. [Hook basic usage](#hook-basic-usage)
+5. [Props](#props)
+6. [Why use toLocaleString](#why-use-toLocaleString)
+7. [Recipes](#recipes)
 
 ## Installation
 
@@ -79,6 +90,8 @@ const MyComponent = () => {
 
 ## Props
 
+The component and the hook accept the same props. They are fully interchangeable.
+
 | Prop Name                   | Type                                                                                 | Default      | Description                                                                                                                                                                                                                            |
 | --------------------------- | ------------------------------------------------------------------------------------ | ------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **isCounting**              | boolean                                                                              | false        | Play and pause counting animation                                                                                                                                                                                                      |
@@ -120,7 +133,7 @@ const MyComponent = () => (
 )
 ```
 
-## Why use `toLocaleString`?
+## Why use `toLocaleString`
 
 Number formatting varies per language group. For example, the number `3842.45` in German will be formatted as `3.842,45` whereas in British English it will be `3,842.45` (spot the different decimal and thousands separators). `Number.toLocaleString()` is a [built-in JS method](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/toLocaleString) that returns a string with a language-sensitive representation of the number. The basic implementation of the method will detect the default locale that is set up on the user's computer and will format the number accordingly. The browser support for `toLocaleString` [is incredibly good!](https://caniuse.com/#search=number%20toLocaleString).
 
@@ -185,4 +198,59 @@ const MyComponent = () => {
 
   return value
 }
+```
+
+## Recipes
+
+### Reset animation on any prop change
+
+Pass the value of the prop that should reset animation to `autoResetKey`. The most common use case here is resetting the animation when the `end` value changes. Example:
+
+```jsx
+import { CountUp } from 'use-count-up'
+
+const MyComponent = ({ end }) => (
+  <CountUp isCounting end={end} autoResetKey={end} />
+)
+```
+
+### Repeat animation on completion
+
+Return from the `onComplete` handler an object with key `shouldRepeat: true`. Optionally the `delay` before repeating can be set. In the example below the animation will be repeated in 2 seconds
+
+```jsx
+import { CountUp } from 'use-count-up'
+
+const onComplete = () => {
+  // do your stuff here
+  return { shouldRepeat: true, delay: 2 }
+}
+
+const MyComponent = () => (
+  <CountUp isCounting end={4378.2} onComplete={onComplete} />
+)
+```
+
+### Count up to infinity
+
+Don't provide `end` and `duration` props. `start` prop can be set to any value
+
+```jsx
+import { CountUp } from 'use-count-up'
+
+const MyComponent = () => (
+  <CountUp isCounting start={1024.4} decimalPlaces={1} />
+)
+```
+
+### Count up/down n-seconds
+
+Set the `easing` to "linear" and `duration` to the seconds it should count tp/down. Count down for 10 seconds example below:
+
+```jsx
+import { CountUp } from 'use-count-up'
+
+const MyComponent = () => (
+  <CountUp isCounting start={10} end={0} duration={10} easing="linear" />
+)
 ```

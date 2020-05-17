@@ -22,7 +22,9 @@
     "count up",
     "count down",
     "counting",
-    "hooks"
+    "hooks",
+    "ios",
+    "android"
   ],
   "author": "Vasil Dimitrov",
   "license": "MIT",
