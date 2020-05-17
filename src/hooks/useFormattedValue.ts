@@ -50,10 +50,15 @@ export const useFormattedValue = (
 
     // use it with params if supported
     if (canUseLocaleParams) {
-      const { locale, options } = toLocaleStringParams
-      const value = rawValue.toLocaleString(locale, options)
+      // gard against incorrect locale
+      try {
+        const { locale, options } = toLocaleStringParams
+        const value = rawValue.toLocaleString(locale, options)
 
-      return addPrefixSuffix(prefix, value, suffix)
+        return addPrefixSuffix(prefix, value, suffix)
+      } catch (e) {
+        console.error(e.message)
+      }
     }
 
     // params are not supported - use manual formatting with fallback prefix and suffix

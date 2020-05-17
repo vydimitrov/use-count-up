@@ -232,6 +232,23 @@ describe('when using the toLocaleString', () => {
     expect(getByText('3,584.5')).toBeInTheDocument()
   })
 
+  it('should log an error if the provided locale is not correct', () => {
+    const mockedConsoleError = jest.fn()
+    global.console.error = mockedConsoleError
+    useElapsedTime.__setElapsedTime(7)
+    render(
+      <CountUp
+        {...fixture}
+        shouldUseToLocaleString
+        toLocaleStringParams={{ locale: 'asdasdsad' }}
+      />
+    )
+
+    expect(mockedConsoleError).toHaveBeenCalledWith(
+      'Invalid language tag: asdasdsad'
+    )
+  })
+
   it('should default to custom formating options with fallback suffix and prefix when toLocaleString locales or options are not supported', () => {
     Object.defineProperty(global.Intl, 'NumberFormat', {
       value: undefined,
