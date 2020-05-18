@@ -38,7 +38,7 @@
 :trophy: Lighter implementation and smaller bundle size [in comparison with similar feature solutions](https://bundlephobia.com/scan-results?packages=use-count-up,react-countup)  
 :scroll: Support `toLocaleString` with fallback options  
 :flags: Declarative API _(no more imperative calls to `start()` and `update()`)_  
-:iphone:&nbsp;&nbsp; React Native support for iOS and Android  
+&nbsp;:iphone:&nbsp; React Native support for iOS and Android  
 :zap: Built with TypeScript
 
 ## Installation
