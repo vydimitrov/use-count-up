@@ -1,0 +1,18 @@
+name: Codecov Coverage
+on: [push]
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - name: Setup Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: '13.x'
+      - name: Build & generate coverage report
+        run: |
+          yarn install
+          yarn test-coverage
+      - name: Upload coverage
+        if: success()
+        uses: codecov/codecov-action@v1
