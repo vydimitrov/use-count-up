@@ -21,22 +21,25 @@
 
 <hr />
 
-- Lighter implementation and smaller bundle size [in comparison with similar solutions](https://bundlephobia.com/scan-results?packages=use-count-up,react-countup)
-- Support `toLocaleString` with fallback options
-- Declarative API _(no more imperative calls to `start()` and `update()`)_
-- React Native support for iOS and Android
-- Built with TypeScript
-
 #### Table of contents
 
-1. [Installation](#installation)
-2. [Demo](#demo)
-3. [Component basic usage](#component-basic-usage)
-4. [Hook basic usage](#hook-basic-usage)
-5. [Props](#props)
-6. [Return values](#return-values)
-7. [Why use toLocaleString](#why-use-toLocaleString)
-8. [Recipes](#recipes)
+1. [Key features](#key-features)
+2. [Installation](#installation)
+3. [Demo](#demo)
+4. [Component basic usage](#component-basic-usage)
+5. [Hook basic usage](#hook-basic-usage)
+6. [Props](#props)
+7. [Return values](#return-values)
+8. [Why use toLocaleString](#why-use-toLocaleString)
+9. [Recipes](#recipes)
+
+## Key features
+
+- :trophy: Lighter implementation and smaller bundle size [in comparison with similar solutions](https://bundlephobia.com/scan-results?packages=use-count-up,react-countup)
+- :scroll: Support `toLocaleString` with fallback options
+- :flags: Declarative API _(no more imperative calls to `start()` and `update()`)_
+- :iphone: React Native support for iOS and Android
+- :zap: Built with TypeScript
 
 ## Installation
 
@@ -46,9 +49,7 @@ yarn add use-count-up
 
 ## Demo
 
-Check the demo on CodeSandbox to get started
-
-[![Edit aged-monad-0mrfu](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/aged-monad-0mrfu?fontsize=14)
+Check the React demo on [CodeSandbox](https://codesandbox.io/s/aged-monad-0mrfu?fontsize=14) and React Native demo on [Expo Snack](https://snack.expo.io/@vydimitrov/use-count-up) to get started.
 
 ## Component basic usage
 
