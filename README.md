@@ -49,6 +49,8 @@ yarn add use-count-up
 
 ## Demo
 
+<img src="https://user-images.githubusercontent.com/10707142/82188777-ac628e80-98ee-11ea-8a10-0469713a3bbc.gif" width="300">  
+
 Check the React demo on [CodeSandbox](https://codesandbox.io/s/aged-monad-0mrfu?fontsize=14) and React Native demo on [Expo Snack](https://snack.expo.io/@vydimitrov/use-count-up) to get started.
 
 ## Component basic usage
