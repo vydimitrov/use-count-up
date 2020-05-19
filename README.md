@@ -9,7 +9,7 @@
   <a href="https://codecov.io/gh/vydimitrov/use-count-up">
     <img alt="Code Coverage" src="https://img.shields.io/codecov/c/gh/vydimitrov/use-count-up" />
   </a>
-  <a href="https://bundlephobia.com/result?p=use-count-up">
+  <a href="https://bundlephobia.com/result?p=use-count-up@latest">
     <img alt="Bundle Size" src="https://img.shields.io/bundlephobia/min/use-count-up" />
   </a>
 
@@ -35,7 +35,7 @@
 
 ## Key features
 
-:trophy: Lighter implementation and smaller bundle size [in comparison with similar feature solutions](https://bundlephobia.com/scan-results?packages=use-count-up,react-countup)  
+:trophy: Lighter implementation and smaller bundle size [in comparison with similar feature solutions](https://bundlephobia.com/scan-results?packages=use-count-up@latest,react-countup)  
 :scroll: Support `toLocaleString` with fallback options  
 :flags: Declarative API _(no more imperative calls to `start()` and `update()`)_  
 &nbsp;:iphone:&nbsp; React Native support for iOS and Android  
