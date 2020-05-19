@@ -5323,10 +5323,10 @@ urlgrey@0.4.4:
   resolved "https://registry.yarnpkg.com/urlgrey/-/urlgrey-0.4.4.tgz#892fe95960805e85519f1cd4389f2cb4cbb7652f"
   integrity sha1-iS/pWWCAXoVRnxzUOJ8stMu3ZS8=
 
-use-elapsed-time@^2.1.1:
-  version "2.1.1"
-  resolved "https://registry.yarnpkg.com/use-elapsed-time/-/use-elapsed-time-2.1.1.tgz#dff04c782963626db20b1be0bcbbd4fe700a525d"
-  integrity sha512-FS6+ngKT+tnSNSk9d7D3tioBHBInrBKqdPh+rZAao/zrO7mxIMGiyebAs/a/6BGaN9w1Kh5YryfNlghn9UoFUA==
+use-elapsed-time@^2.1.2:
+  version "2.1.2"
+  resolved "https://registry.yarnpkg.com/use-elapsed-time/-/use-elapsed-time-2.1.2.tgz#176326762360232e0d2320d78e81442838e2375c"
+  integrity sha512-g/FGB5japFUeCXWp/fuvPf5dZHeaMt8HpmSVeBr7C56CqOqwSxWWwGHvRVoK5IsbDXBUs5Wv1eyrJdvruO7MMw==
 
 use@^3.1.0:
   version "3.1.1"

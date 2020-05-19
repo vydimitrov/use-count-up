@@ -1,6 +1,6 @@
 {
   "name": "use-count-up",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "React/React Native component and hook to animate counting up or down to a number",
   "main": "./lib/index.js",
   "scripts": {
@@ -33,7 +33,7 @@
   },
   "homepage": "https://github.com/vydimitrov/use-count-up#readme",
   "dependencies": {
-    "use-elapsed-time": "^2.1.1"
+    "use-elapsed-time": "^2.1.2"
   },
   "peerDependencies": {
     "prop-types": ">=15.7.1",

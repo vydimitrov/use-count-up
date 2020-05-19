@@ -1,5 +1,11 @@
 # Change Log
 
+## 2.1.0 (May 19th, 2020)
+
+**Big fix:**
+
+- Upgrade use-elapsed-time dependency to v 2.1.2, which fixes and issue with reset method that takes none number values
+
 ## 2.0.0 (May 18th, 2020)
 
 **Breaking Changes**
