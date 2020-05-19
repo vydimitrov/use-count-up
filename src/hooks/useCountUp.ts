@@ -1,22 +1,25 @@
 import { useElapsedTime } from 'use-elapsed-time'
 import { CountUpProps, CountUpReturnProps } from '../types'
 import { useFormattedValue } from '../hooks'
-import { getEasing, defaultEasing } from '../utils'
-
-const defaultDuration = 2
+import {
+  getEasing,
+  defaultEasing,
+  DEFAULT_DURATION,
+  DEFAULT_START,
+} from '../utils'
 
 const getDuration = (end?: number, duration?: number) => {
   if (typeof end !== 'number') {
     return undefined
   }
 
-  return typeof duration === 'number' ? duration : defaultDuration
+  return typeof duration === 'number' ? duration : DEFAULT_DURATION
 }
 
 const useCountUp = (props: CountUpProps): CountUpReturnProps => {
   const {
     isCounting = false,
-    start = 0,
+    start = DEFAULT_START,
     end,
     duration,
     easing = defaultEasing,

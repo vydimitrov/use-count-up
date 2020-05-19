@@ -6,6 +6,10 @@
 
 - Upgrade use-elapsed-time dependency to v 2.1.2, which fixes and issue with reset method that takes none number values
 
+**Implemented enhancements:**
+
+- The default decimal places count is not determined based on the maximum number of decimal places in `start` and `end`. The decimal places count is also used in `toLocaleString`
+
 ## 2.0.0 (May 18th, 2020)
 
 **Breaking Changes**

@@ -102,7 +102,7 @@ The component and the hook accept the same props. They are fully interchangeable
 | **start**                   | number              | 0            | Initial value                                                                                                                                                                                                                                                                                            |
 | **end**                     | number              | -            | Target value                                                                                                                                                                                                                                                                                             |
 | **duration**                | number              | -            | Animation duration in seconds. Defaults to 2 seconds if `end` is set. If `end` isn't set, the animation will continue to Infinity.                                                                                                                                                                       |
-| **decimalPlaces**           | number              | 0            | Number of decimal places after the decimal separator                                                                                                                                                                                                                                                     |
+| **decimalPlaces**           | number              | -            | Number of decimal places after the decimal separator. Defaults to the max decimal places count from `start` and `end`                                                                                                                                                                                    |
 | **decimalSeparator**        | string              | -            | Decimal separator character                                                                                                                                                                                                                                                                              |
 | **thousandsSeparator**      | string              | -            | Thousands separator character                                                                                                                                                                                                                                                                            |
 | **prefix**                  | string              | -            | Static text before the value                                                                                                                                                                                                                                                                             |
@@ -239,9 +239,7 @@ Don't provide `end` and `duration` props. `start` prop can be set to any value
 ```jsx
 import { CountUp } from 'use-count-up'
 
-const MyComponent = () => (
-  <CountUp isCounting start={1024.4} decimalPlaces={1} />
-)
+const MyComponent = () => <CountUp isCounting start={1024.4} />
 ```
 
 ### Count up/down n-seconds

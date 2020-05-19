@@ -43,7 +43,7 @@ describe('functional tests', () => {
       <CountUp {...fixture} end={undefined} start={43.67} />
     )
 
-    expect(getByText('61')).toBeInTheDocument()
+    expect(getByText('61.02')).toBeInTheDocument()
   })
 
   it('should pass isCounting to useElapsedTime hook', () => {
@@ -91,7 +91,7 @@ describe('when using the component with children as a render prop', () => {
   it('should pass the current count up value and reset method to children render function', () => {
     const children = jest.fn()
     render(
-      <CountUp {...fixture} start={43.67}>
+      <CountUp {...fixture} start={43}>
         {children}
       </CountUp>
     )
@@ -139,6 +139,34 @@ describe('easing testing', () => {
       expect(getByText('3684')).toBeInTheDocument()
     }
   )
+
+  it.each`
+    easing            | midValue
+    ${'easeOutCubic'} | ${'694.2'}
+    ${'easeInCubic'}  | ${'139.0'}
+    ${'linear'}       | ${'416.6'}
+  `(
+    'should return the correct start, mid and end values when the easing is set to $easing and values have decimal places',
+    ({ easing, midValue }) => {
+      useElapsedTime.__setElapsedTime(0)
+
+      const getComponent = () => (
+        <CountUp {...fixture} start={46.5} end={786.7} easing={easing} />
+      )
+
+      const { getByText, rerender } = render(getComponent())
+
+      expect(getByText('46.5')).toBeInTheDocument()
+
+      useElapsedTime.__setElapsedTime(5)
+      rerender(getComponent())
+      expect(getByText(midValue)).toBeInTheDocument()
+
+      useElapsedTime.__setElapsedTime(10)
+      rerender(getComponent())
+      expect(getByText('786.7')).toBeInTheDocument()
+    }
+  )
 })
 
 describe('when formatting the number', () => {
@@ -154,6 +182,24 @@ describe('when formatting the number', () => {
     const { getByText } = render(<CountUp {...fixture} decimalPlaces={2} />)
 
     expect(getByText('3562.08')).toBeInTheDocument()
+  })
+
+  it('should add as many decimal places as the bigger decimal places count from start and end when decimalPlaces is not set and end has more decimal places', () => {
+    useElapsedTime.__setElapsedTime(2)
+    const { getByText } = render(
+      <CountUp {...fixture} start={12.478} end={18.93412} />
+    )
+
+    expect(getByText('15.62859')).toBeInTheDocument()
+  })
+
+  it('should add as many decimal places as the bigger decimal places count from start and end when decimalPlaces is not set and start has more decimal places', () => {
+    useElapsedTime.__setElapsedTime(2)
+    const { getByText } = render(
+      <CountUp {...fixture} start={12.478} end={18.9} />
+    )
+
+    expect(getByText('15.612')).toBeInTheDocument()
   })
 
   it('should use decimal and thousand separators if there are provided', () => {
@@ -203,7 +249,16 @@ describe('when using the toLocaleString', () => {
       <CountUp {...fixture} shouldUseToLocaleString />
     )
 
-    expect(getByText('3,584.532')).toBeInTheDocument()
+    expect(getByText('3,585')).toBeInTheDocument()
+  })
+
+  it('should use toLocaleString when it is supported without params and format number based on decimal places in the "end" value', () => {
+    useElapsedTime.__setElapsedTime(7)
+    const { getByText } = render(
+      <CountUp {...fixture} shouldUseToLocaleString end={1465.23} />
+    )
+
+    expect(getByText('1,425.67')).toBeInTheDocument()
   })
 
   it('should use toLocaleString when it is supported with locale', () => {
@@ -216,7 +271,21 @@ describe('when using the toLocaleString', () => {
       />
     )
 
-    expect(getByText('3.584,532')).toBeInTheDocument()
+    expect(getByText('3.585')).toBeInTheDocument()
+  })
+
+  it('should use toLocaleString when it is supported with locale and format number based on decimal places in the "end" value', () => {
+    useElapsedTime.__setElapsedTime(7)
+    const { getByText } = render(
+      <CountUp
+        {...fixture}
+        shouldUseToLocaleString
+        toLocaleStringParams={{ locale: 'de' }}
+        end={76.8}
+      />
+    )
+
+    expect(getByText('74,7')).toBeInTheDocument()
   })
 
   it('should use toLocaleString when it is supported with options', () => {
@@ -226,10 +295,11 @@ describe('when using the toLocaleString', () => {
         {...fixture}
         shouldUseToLocaleString
         toLocaleStringParams={{ options: { maximumFractionDigits: 1 } }}
+        end={783.8}
       />
     )
 
-    expect(getByText('3,584.5')).toBeInTheDocument()
+    expect(getByText('762.6')).toBeInTheDocument()
   })
 
   it('should log an error if the provided locale is not correct and use to fallback options', () => {

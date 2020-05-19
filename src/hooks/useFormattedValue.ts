@@ -1,6 +1,7 @@
 import { useMemo } from 'react'
 import { CountUpProps } from '../types'
-import { getToLocaleStringParamsSupport } from '../utils'
+import { getToLocaleStringParamsSupport, DEFAULT_START } from '../utils'
+import { number } from 'prop-types'
 
 const addThousandsSeparator = (value: string, separator: string) =>
   value.replace(/\B(?=(\d{3})+(?!\d))/g, separator)
@@ -8,11 +9,31 @@ const addThousandsSeparator = (value: string, separator: string) =>
 const addPrefixSuffix = (prefix: string, value: string, suffix: string) =>
   `${prefix}${value}${suffix}`
 
+const getDecimalPartLength = (num: number) =>
+  (num.toString().split('.')[1] || '').length
+
+const getDefaultDecimalPlaces = (start: number, end?: number) => {
+  const startDecimals = getDecimalPartLength(start)
+  const endDecimals = getDecimalPartLength(end || 1)
+
+  return startDecimals >= endDecimals ? startDecimals : endDecimals
+}
+
+const getNumForLocaleString = (number: number, decimalPlaces: number) => {
+  if (decimalPlaces === 0) {
+    return Math.round(number)
+  }
+
+  return parseFloat(number.toFixed(decimalPlaces))
+}
+
 export const useFormattedValue = (
   rawValue: number,
   {
+    start = DEFAULT_START,
+    end,
+    decimalPlaces = getDefaultDecimalPlaces(start, end),
     formatter,
-    decimalPlaces = 0,
     decimalSeparator = '.',
     thousandsSeparator = '',
     prefix = '',
@@ -42,9 +63,10 @@ export const useFormattedValue = (
 
   // second highest priority goes to toLocaleString
   if (shouldUseToLocaleString) {
+    const valueWithDecimals = getNumForLocaleString(rawValue, decimalPlaces)
     // to toLocaleString has better support without params
     if (typeof toLocaleStringParams === 'undefined') {
-      const value = rawValue.toLocaleString()
+      const value = valueWithDecimals.toLocaleString()
       return addPrefixSuffix(prefix, value, suffix)
     }
 
@@ -53,7 +75,7 @@ export const useFormattedValue = (
       // gard against incorrect locale
       try {
         const { locale, options } = toLocaleStringParams
-        const value = rawValue.toLocaleString(locale, options)
+        const value = valueWithDecimals.toLocaleString(locale, options)
 
         return addPrefixSuffix(prefix, value, suffix)
       } catch (e) {
