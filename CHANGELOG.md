@@ -1,5 +1,11 @@
 # Change Log
 
+## 2.1.1 (May 21st, 2020)
+
+**Big fix:**
+
+- Fix an issue where rounding numbers with bitwise shifting `number | 0` caused the last number to jump
+
 ## 2.1.0 (May 19th, 2020)
 
 **Big fix:**

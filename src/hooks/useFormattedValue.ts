@@ -47,7 +47,7 @@ export const useFormattedValue = (
   const canUseLocaleParams = useMemo(() => getToLocaleStringParamsSupport(), [])
   const getBaseValueFormatting = () => {
     if (decimalPlaces === 0) {
-      const valueStr = (rawValue | 0).toString()
+      const valueStr = Math.round(rawValue).toString()
       return addThousandsSeparator(valueStr, thousandsSeparator)
     }
 

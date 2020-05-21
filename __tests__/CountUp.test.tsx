@@ -96,7 +96,7 @@ describe('when using the component with children as a render prop', () => {
       </CountUp>
     )
 
-    expect(children).toHaveBeenCalledWith({ value: '3615', reset })
+    expect(children).toHaveBeenCalledWith({ value: '3616', reset })
   })
 })
 
@@ -115,7 +115,7 @@ describe('easing testing', () => {
   it.each`
     easing            | midValue
     ${'easeOutCubic'} | ${'3229'}
-    ${'easeInCubic'}  | ${'500'}
+    ${'easeInCubic'}  | ${'501'}
     ${'linear'}       | ${'1865'}
   `(
     'should return the correct start, mid and end values when the easing is set to $easing',
