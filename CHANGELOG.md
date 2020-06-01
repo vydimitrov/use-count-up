@@ -1,5 +1,11 @@
 # Change Log
 
+## 2.1.2 (June 1st, 2020)
+
+**Implemented enhancements:**
+
+- Upgrade `use-elapsed-time` package to v2.1.3 which replaces `useLayoutEffect` with `useEffect` when the environment is node for SSR and removes side effects from `useState` so React.StrictMode works as expected in development
+
 ## 2.1.1 (May 21st, 2020)
 
 **Big fix:**
