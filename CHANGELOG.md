@@ -1,5 +1,11 @@
 # Change Log
 
+## 2.1.3 (June 3rd, 2020)
+
+**Big fix:**
+
+- Fix: upgrade use-elapsed-time to 2.1.4 which fixes an issue where pausing the animation once it is completed, resetting the timer and playing again it did not work.
+
 ## 2.1.2 (June 1st, 2020)
 
 **Implemented enhancements:**
