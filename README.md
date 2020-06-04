@@ -10,7 +10,7 @@
     <img alt="Code Coverage" src="https://img.shields.io/codecov/c/gh/vydimitrov/use-count-up" />
   </a>
   <a href="https://bundlephobia.com/result?p=use-count-up@latest">
-    <img alt="Bundle Size" src="https://img.shields.io/bundlephobia/min/use-count-up" />
+    <img alt="Bundle Size" src="https://img.shields.io/bundlephobia/minzip/use-count-up" />
   </a>
 
   <p>
