@@ -39,7 +39,8 @@
 :scroll: Support `toLocaleString` with fallback options  
 :flags: Declarative API _(no more imperative calls to `start()` and `update()`)_  
 &nbsp;:iphone:&nbsp; React Native support for iOS and Android  
-:zap: Built with TypeScript
+:zap: Built with TypeScript  
+&nbsp;:file_cabinet: Server-side rendering (SSR) compatibility
 
 ## Installation
 
