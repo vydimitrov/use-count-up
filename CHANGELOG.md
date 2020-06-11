@@ -1,22 +1,34 @@
 # Change Log
 
+## 2.2.4 (June 11th, 2020)
+
+**Implemented enhancements:**
+
+- feat: use Rollup instead of Webpack to bundle the package, which enables ES module bundles.
+
+## 2.1.4 (June 8th, 2020)
+
+**Implemented enhancements:**
+
+- chore: update list of keywords in package.json
+
 ## 2.1.3 (June 3rd, 2020)
 
 **Big fix:**
 
-- Fix: upgrade use-elapsed-time to 2.1.4 which fixes an issue where pausing the animation once it is completed, resetting the timer and playing again it did not work.
+- fix: upgrade use-elapsed-time to 2.1.4 which fixes an issue where pausing the animation once it is completed, resetting the timer and playing again it did not work.
 
 ## 2.1.2 (June 1st, 2020)
 
 **Implemented enhancements:**
 
-- Upgrade `use-elapsed-time` package to v2.1.3 which replaces `useLayoutEffect` with `useEffect` when the environment is node for SSR and removes side effects from `useState` so React.StrictMode works as expected in development
+- fix: upgrade `use-elapsed-time` package to v2.1.3 which replaces `useLayoutEffect` with `useEffect` when the environment is node for SSR and removes side effects from `useState` so React.StrictMode works as expected in development
 
 ## 2.1.1 (May 21st, 2020)
 
 **Big fix:**
 
-- Fix an issue where rounding numbers with bitwise shifting `number | 0` caused the last number to jump
+- fix: fix an issue where rounding numbers with bitwise shifting `number | 0` caused the last number to jump
 
 ## 2.1.0 (May 19th, 2020)
 

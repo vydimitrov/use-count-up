@@ -271,7 +271,7 @@ describe('when using the toLocaleString', () => {
       />
     )
 
-    expect(getByText('3.585')).toBeInTheDocument()
+    expect(getByText('3,585')).toBeInTheDocument()
   })
 
   it('should use toLocaleString when it is supported with locale and format number based on decimal places in the "end" value', () => {
@@ -285,7 +285,7 @@ describe('when using the toLocaleString', () => {
       />
     )
 
-    expect(getByText('74,7')).toBeInTheDocument()
+    expect(getByText('74.7')).toBeInTheDocument()
   })
 
   it('should use toLocaleString when it is supported with options', () => {
