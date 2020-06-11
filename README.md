@@ -39,7 +39,7 @@
 :scroll: Support `toLocaleString` with fallback options  
 :flags: Declarative API _(no more imperative calls to `start()` and `update()`)_  
 &nbsp;:iphone:&nbsp; React Native support for iOS and Android  
-:zap: Built with TypeScript  
+:deciduous_tree: Tree-shakable (Minified size further reduced by ~ 0.4kB when only the hook is used)  
 &nbsp;:file_cabinet: Server-side rendering (SSR) compatibility
 
 ## Installation
