@@ -1,7 +1,6 @@
 import { useMemo } from 'react'
 import { CountUpProps } from '../types'
 import { getToLocaleStringParamsSupport, DEFAULT_START } from '../utils'
-import { number } from 'prop-types'
 
 const addThousandsSeparator = (value: string, separator: string) =>
   value.replace(/\B(?=(\d{3})+(?!\d))/g, separator)

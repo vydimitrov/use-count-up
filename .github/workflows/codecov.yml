@@ -8,7 +8,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v1
         with:
-          node-version: '13.x'
+          node-version: '12.x'
       - name: Build & generate coverage report
         run: |
           yarn install
