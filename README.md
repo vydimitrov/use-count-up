@@ -7,9 +7,6 @@
     <img alt="Weekly downloads" src="https://img.shields.io/npm/dw/use-count-up" />
   </a>
   <a href="https://codecov.io/gh/vydimitrov/use-count-up">
-    <img alt="Build Status" src="https://img.shields.io/github/workflow/status/vydimitrov/use-count-up/Codecov%20Coverage" />
-  </a>
-  <a href="https://codecov.io/gh/vydimitrov/use-count-up">
     <img alt="Code Coverage" src="https://img.shields.io/codecov/c/gh/vydimitrov/use-count-up" />
   </a>
   <a href="https://bundlephobia.com/result?p=use-count-up@latest">
