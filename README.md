@@ -3,7 +3,10 @@
   <a href="https://www.npmjs.com/package/use-count-up">
     <img alt="NPM version" src="https://img.shields.io/npm/v/use-count-up" />
   </a>
-   <a href="https://codecov.io/gh/vydimitrov/use-count-up">
+  <a href="https://www.npmtrends.com/use-count-up">
+    <img alt="Weekly downloads" src="https://img.shields.io/npm/dw/use-count-up" />
+  </a>
+  <a href="https://codecov.io/gh/vydimitrov/use-count-up">
     <img alt="Build Status" src="https://img.shields.io/github/workflow/status/vydimitrov/use-count-up/Codecov%20Coverage" />
   </a>
   <a href="https://codecov.io/gh/vydimitrov/use-count-up">
