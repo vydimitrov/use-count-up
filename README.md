@@ -15,7 +15,7 @@
 
   <p>
     <br />
-    <strong>React/React Native component and hook to animate counting up or down to a number</strong>
+    <strong>React/React Native component and hook to animate<br />counting up or down to a number</strong>
   </p>
 </div>
 
