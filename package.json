@@ -55,7 +55,7 @@
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "13.0.2",
-    "@rollup/plugin-node-resolve": "8.4.0",
+    "@rollup/plugin-node-resolve": "11.0.1",
     "@testing-library/jest-dom": "4.2.4",
     "@testing-library/react": "9.5.0",
     "@testing-library/react-hooks": "3.7.0",
