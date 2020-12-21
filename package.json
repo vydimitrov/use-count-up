@@ -64,20 +64,20 @@
     "@types/react": "17.0.0",
     "@types/react-dom": "17.0.0",
     "babel-jest": "25.5.1",
-    "codecov": "3.7.1",
+    "codecov": "3.8.1",
     "jest": "25.5.4",
     "prettier": "1.19.1",
     "prop-types": "15.7.2",
-    "react": "16.8.0",
-    "react-dom": "16.8.0",
-    "react-test-renderer": "16.8.0",
+    "react": "16.14.0",
+    "react-dom": "16.14.0",
+    "react-test-renderer": "16.14.0",
     "rollup": "2.35.1",
-    "rollup-plugin-peer-deps-external": "2.2.2",
+    "rollup-plugin-peer-deps-external": "2.2.4",
     "rollup-plugin-terser": "7.0.2",
-    "rollup-plugin-typescript2": "0.27.1",
+    "rollup-plugin-typescript2": "0.29.0",
     "ts-jest": "25.5.1",
-    "tslib": "2.0.0",
-    "typescript": "3.9.5"
+    "tslib": "2.0.3",
+    "typescript": "3.9.7"
   },
   "files": [
     "lib"
