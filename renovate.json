@@ -1,3 +1,20 @@
 {
-  "extends": ["github>4Catalyzer/renovate-config:library", ":automergeMinor"]
+  "extends": [
+    "config:base",
+    ":disablePeerDependencies",
+    ":semanticCommitTypeAll(chore)",
+    ":automergeMinor",
+    "schedule:daily"
+  ],
+  "packageRules": [
+    {
+      "extends": ["schedule:weekly"],
+      "updateTypes": ["patch", "minor"],
+      "groupName": "all non-major dependencies",
+      "groupSlug": "all-minor-patch"
+    },
+  ],
+  "rangeStrategy": "bump",
+  "postUpdateOptions": "yarnDedupeHighest",
+  "semanticCommits": true
 }
