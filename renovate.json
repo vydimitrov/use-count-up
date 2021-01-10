@@ -12,7 +12,7 @@
       "updateTypes": ["patch", "minor"],
       "groupName": "all non-major dependencies",
       "groupSlug": "all-minor-patch"
-    },
+    }
   ],
   "rangeStrategy": "bump",
   "postUpdateOptions": "yarnDedupeHighest",
