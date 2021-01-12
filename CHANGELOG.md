@@ -1,5 +1,18 @@
 # Change Log
 
+## 2.2.6 (Jan 12th, 2021)
+
+**Implemented enhancements:**
+
+- chore: Add renovate to the repo
+- chore: Update all packages
+
+## 2.2.5 (Sept 10th, 2020)
+
+**Implemented enhancements:**
+
+- chore: upgrade rollup and rollup-terser packages
+
 ## 2.2.4 (June 11th, 2020)
 
 **Implemented enhancements:**
