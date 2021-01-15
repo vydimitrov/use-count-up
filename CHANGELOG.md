@@ -1,5 +1,11 @@
 # Change Log
 
+## 2.3.0 (Jan 15th, 2021)
+
+**Implemented enhancements:**
+
+- feat: add list of supported browsers to package.json
+
 ## 2.2.6 (Jan 12th, 2021)
 
 **Implemented enhancements:**
