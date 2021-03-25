@@ -1,5 +1,11 @@
 # Change Log
 
+## 2.3.1 (March 25th, 2021)
+
+**Implemented enhancements:**
+
+- chore: upgrade dependencies
+
 ## 2.3.0 (Jan 15th, 2021)
 
 **Implemented enhancements:**
