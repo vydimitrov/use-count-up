@@ -54,7 +54,7 @@
     "react": ">=16.8.0"
   },
   "devDependencies": {
-    "@rollup/plugin-commonjs": "17.1.0",
+    "@rollup/plugin-commonjs": "18.0.0",
     "@rollup/plugin-node-resolve": "11.2.1",
     "@testing-library/jest-dom": "5.11.10",
     "@testing-library/react": "11.2.5",
