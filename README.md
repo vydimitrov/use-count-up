@@ -21,18 +21,6 @@
 
 <hr />
 
-#### Table of contents
-
-1. [Key features](#key-features)
-2. [Installation](#installation)
-3. [Demo](#demo)
-4. [Component basic usage](#component-basic-usage)
-5. [Hook basic usage](#hook-basic-usage)
-6. [Props](#props)
-7. [Return values](#return-values)
-8. [Why use toLocaleString](#why-use-toLocaleString)
-9. [Recipes](#recipes)
-
 ## Key features
 
 :trophy: Lighter implementation and smaller bundle size [in comparison with similar feature solutions](https://bundlephobia.com/scan-results?packages=use-count-up@latest,react-countup)  
