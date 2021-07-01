@@ -4005,10 +4005,10 @@ urlgrey@0.4.4:
   resolved "https://registry.yarnpkg.com/urlgrey/-/urlgrey-0.4.4.tgz#892fe95960805e85519f1cd4389f2cb4cbb7652f"
   integrity sha1-iS/pWWCAXoVRnxzUOJ8stMu3ZS8=
 
-use-elapsed-time@^2.1.8:
-  version "2.1.8"
-  resolved "https://registry.yarnpkg.com/use-elapsed-time/-/use-elapsed-time-2.1.8.tgz#3c830ae730e2bc204f2294b66be15580f0016ea5"
-  integrity sha512-lNLTDffKHdHWweQNvnch9tFI2eRP3tXccSLrwE7U6xrfyWFNEgNQZWWsGhQvtwKa0kJ6L+7E5wKbi3jg86opjg==
+use-elapsed-time@^3.0.1:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/use-elapsed-time/-/use-elapsed-time-3.0.1.tgz#43e562d711a1779580bb7548e14619c4dcfacfa1"
+  integrity sha512-Z83sKnBukVIgKYQFP1xgXgL5m9OPAkJ3bw2U9ghdemsdR3Z1Ju0Mco7SPVbgcNIJ2VJgZB/nurFouDOCC4P7Ag==
 
 use@^3.1.0:
   version "3.1.1"

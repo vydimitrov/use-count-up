@@ -47,7 +47,7 @@
   },
   "homepage": "https://github.com/vydimitrov/use-count-up#readme",
   "dependencies": {
-    "use-elapsed-time": "^2.1.8"
+    "use-elapsed-time": "^3.0.1"
   },
   "peerDependencies": {
     "prop-types": ">=15.7.1",
