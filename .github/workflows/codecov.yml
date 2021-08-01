@@ -15,4 +15,4 @@ jobs:
           yarn test-coverage
       - name: Upload coverage
         if: success()
-        uses: codecov/codecov-action@v1
+        uses: codecov/codecov-action@v2
