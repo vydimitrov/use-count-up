@@ -1,2 +1,2 @@
-export { useCountUp } from './hooks'
-export { CountUp } from './components'
+export { useCountUp } from './useCountUp'
+export { CountUp } from './CountUp'

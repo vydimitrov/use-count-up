@@ -1,32 +1,9 @@
-import { Options, ElapsedTimeReturnValue } from 'use-elapsed-time'
-
-export type OnComplete = Options['onComplete']
-export type AutoResetKey = Options['autoResetKey']
-export type Reset = ElapsedTimeReturnValue['reset']
+import {
+  ReturnValue as ETReturnValue,
+  Props as ETProps,
+} from 'use-elapsed-time'
 
 export type ReturnValue = number | string | React.ReactNode
-export type Formatter = (value: number) => ReturnValue
-export type ToLocaleStringLocales = string | string[]
-export type ToLocaleStringOptions = {
-  localeMatcher?: string
-  style?: string
-  numberingSystem?: string
-  unit?: string
-  unitDisplay?: string
-  currency?: string
-  currencyDisplay?: string
-  useGrouping?: boolean
-  minimumIntegerDigits?: number
-  minimumFractionDigits?: number
-  maximumFractionDigits?: number
-  minimumSignificantDigits?: number
-  maximumSignificantDigits?: number
-  notation?: string
-}
-export type ToLocaleStringParams = {
-  locale?: ToLocaleStringLocales
-  options?: ToLocaleStringOptions
-}
 
 export type EasingFn = (
   currentTime: number,
@@ -40,7 +17,7 @@ export type CountUpReturnProps = {
   /** Current value of the count up animation */
   value: ReturnValue
   /** Method to start over the animation*/
-  reset: Reset
+  reset: ETReturnValue['reset']
 }
 
 export type CountUpProps = {
@@ -62,22 +39,10 @@ export type CountUpProps = {
   prefix?: string
   /** Static text after the value. Default: "" */
   suffix?: string
-  /** Indicates if toLocaleString should be used. Default: false */
-  shouldUseToLocaleString?: boolean
-  /** Set the toLocaleString locale and options*/
-  toLocaleStringParams?: ToLocaleStringParams
-  /** Static text before the value to be used in case toLocaleString params are not supported. Default: "" */
-  fallbackPrefix?: string
-  /** Static text after the value to be used in case toLocaleString params are not supported. Default: "" */
-  fallbackSuffix?: string
   /** On animation complete event handler */
-  onComplete?: OnComplete
+  onComplete?: ETProps['onComplete']
   /**  Easing function to control how the animation is progressing. Default: easeOutExpo */
   easing?: Easing
   /** Function that formats the output value */
-  formatter?: Formatter
-  /** Render function to render the count up value. Used by the component */
-  children?: (props: CountUpReturnProps) => ReturnValue
-  /** Auto reset animation when the key changes. It works similar to React's key prop */
-  autoResetKey?: AutoResetKey
+  formatter?: (value: number) => ReturnValue
 }

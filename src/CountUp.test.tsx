@@ -2,7 +2,7 @@ import React from 'react'
 import { render } from '@testing-library/react'
 import '@testing-library/jest-dom/extend-expect'
 
-import { CountUp } from '../src'
+import { CountUp } from '.'
 
 const useElapsedTime = require('use-elapsed-time')
 
@@ -59,13 +59,7 @@ describe('functional tests', () => {
     const onComplete = jest.fn()
     const autoResetKey = '100'
 
-    render(
-      <CountUp
-        {...fixture}
-        onComplete={onComplete}
-        autoResetKey={autoResetKey}
-      />
-    )
+    render(<CountUp {...fixture} onComplete={onComplete} />)
 
     expect(useElapsedTime.__getConfig()).toEqual({
       duration: 10,
@@ -228,119 +222,5 @@ describe('when formatting the number', () => {
     const { getByText } = render(<CountUp {...fixture} suffix=" left" />)
 
     expect(getByText('3562 left')).toBeInTheDocument()
-  })
-
-  it('should prefer custom formatter to toLocaleString', () => {
-    const formatter = jest.fn().mockReturnValueOnce('12.765')
-    useElapsedTime.__setElapsedTime(7.4)
-    const { getByText } = render(
-      <CountUp {...fixture} formatter={formatter} shouldUseToLocaleString />
-    )
-
-    expect(getByText('12.765')).toBeInTheDocument()
-    expect(formatter).toHaveBeenCalledWith(3619.250016)
-  })
-})
-
-describe('when using the toLocaleString', () => {
-  it('should use toLocaleString when it is supported without params', () => {
-    useElapsedTime.__setElapsedTime(7)
-    const { getByText } = render(
-      <CountUp {...fixture} shouldUseToLocaleString />
-    )
-
-    expect(getByText('3,585')).toBeInTheDocument()
-  })
-
-  it('should use toLocaleString when it is supported without params and format number based on decimal places in the "end" value', () => {
-    useElapsedTime.__setElapsedTime(7)
-    const { getByText } = render(
-      <CountUp {...fixture} shouldUseToLocaleString end={1465.23} />
-    )
-
-    expect(getByText('1,425.67')).toBeInTheDocument()
-  })
-
-  it('should use toLocaleString when it is supported with locale', () => {
-    useElapsedTime.__setElapsedTime(7)
-    const { getByText } = render(
-      <CountUp
-        {...fixture}
-        shouldUseToLocaleString
-        toLocaleStringParams={{ locale: 'de' }}
-      />
-    )
-
-    expect(getByText('3,585')).toBeInTheDocument()
-  })
-
-  it('should use toLocaleString when it is supported with locale and format number based on decimal places in the "end" value', () => {
-    useElapsedTime.__setElapsedTime(7)
-    const { getByText } = render(
-      <CountUp
-        {...fixture}
-        shouldUseToLocaleString
-        toLocaleStringParams={{ locale: 'de' }}
-        end={76.8}
-      />
-    )
-
-    expect(getByText('74.7')).toBeInTheDocument()
-  })
-
-  it('should use toLocaleString when it is supported with options', () => {
-    useElapsedTime.__setElapsedTime(7)
-    const { getByText } = render(
-      <CountUp
-        {...fixture}
-        shouldUseToLocaleString
-        toLocaleStringParams={{ options: { maximumFractionDigits: 1 } }}
-        end={783.8}
-      />
-    )
-
-    expect(getByText('762.6')).toBeInTheDocument()
-  })
-
-  it('should log an error if the provided locale is not correct and use to fallback options', () => {
-    const mockedConsoleError = jest.fn()
-    global.console.error = mockedConsoleError
-    useElapsedTime.__setElapsedTime(7)
-    const { getByText } = render(
-      <CountUp
-        {...fixture}
-        shouldUseToLocaleString
-        toLocaleStringParams={{ locale: 'asdasdsad' }}
-        thousandsSeparator=" "
-        decimalSeparator="."
-        decimalPlaces={2}
-      />
-    )
-
-    expect(mockedConsoleError).toHaveBeenCalled()
-    expect(getByText('3 584.53')).toBeInTheDocument()
-  })
-
-  it('should default to custom formating options with fallback suffix and prefix when toLocaleString locales or options are not supported', () => {
-    Object.defineProperty(global.Intl, 'NumberFormat', {
-      value: undefined,
-      configurable: true,
-    })
-    useElapsedTime.__setElapsedTime(7)
-
-    const { getByText } = render(
-      <CountUp
-        {...fixture}
-        shouldUseToLocaleString
-        toLocaleStringParams={{ options: { maximumFractionDigits: 2 } }}
-        thousandsSeparator=" "
-        decimalSeparator="."
-        decimalPlaces={2}
-        fallbackPrefix="$"
-        fallbackSuffix=" left"
-      />
-    )
-
-    expect(getByText('$3 584.53 left')).toBeInTheDocument()
   })
 })

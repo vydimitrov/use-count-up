@@ -1,5 +1,15 @@
 # Change Log
 
+## 3.0.0 ( ---- , 2021)
+
+**Breaking Changes:**
+
+- IE is not longer supported
+- `autoResetKey` props has been deprecated
+- `toLocaleString` feature has been deprecated. The same result can be achieved using the `formatter` function.
+
+
+
 ## 2.3.1 (March 25th, 2021)
 
 **Implemented enhancements:**

@@ -1,17 +1,23 @@
 {
   "name": "use-count-up",
-  "version": "2.3.1",
+  "version": "3.0.0",
   "description": "React/React Native component and hook to animate counting up or down to a number",
-  "main": "lib/index.js",
-  "module": "lib/index.module.js",
-  "source": "src/index.ts",
+  "main": "./lib/index.js",
+  "module": "./lib/index.module.js",
+  "source": "./src/index.ts",
+  "types": "./lib/index.d.ts",
+  "author": "Vasil Dimitrov",
+  "license": "MIT",
+  "files": [
+    "lib"
+  ],
   "scripts": {
-    "build": "rollup -c",
-    "prepublish": "yarn build",
-    "dev:push": "yarn build && yalc push",
-    "test": "jest",
+    "start": "node scripts/serve.js",
+    "ts-declaration": "tsc --declaration --emitDeclarationOnly --outDir lib",
+    "build": "yarn ts-declaration && node scripts/build.js",
+    "test": "jest --collectCoverage --coverageDirectory=\"coverage\"",
     "test-watch": "jest --watch",
-    "test-coverage": "jest --collectCoverage --coverageDirectory=\"coverage\""
+    "prepublish": "yarn build"
   },
   "repository": {
     "type": "git",
@@ -40,51 +46,34 @@
     "use-countup",
     "typescript"
   ],
-  "author": "Vasil Dimitrov",
-  "license": "MIT",
   "bugs": {
     "url": "https://github.com/vydimitrov/use-count-up/issues"
   },
   "homepage": "https://github.com/vydimitrov/use-count-up#readme",
   "dependencies": {
-    "use-elapsed-time": "^2.1.8"
+    "use-elapsed-time": "3.0.1"
   },
   "peerDependencies": {
     "prop-types": ">=15.7.1",
     "react": ">=16.8.0"
   },
   "devDependencies": {
-    "@rollup/plugin-commonjs": "20.0.0",
-    "@rollup/plugin-node-resolve": "13.0.4",
     "@testing-library/jest-dom": "5.14.1",
-    "@testing-library/react": "11.2.7",
+    "@testing-library/react": "12.0.0",
     "@testing-library/react-hooks": "7.0.1",
-    "@types/jest": "26.0.24",
-    "@types/node": "14.17.6",
-    "@types/react": "17.0.15",
+    "@types/jest": "27.0.1",
+    "@types/node": "16.7.5",
+    "@types/react": "17.0.19",
     "@types/react-dom": "17.0.9",
-    "babel-jest": "26.6.3",
     "codecov": "3.8.3",
-    "jest": "26.6.3",
+    "esbuild": "0.12.24",
+    "jest": "27.1.0",
     "prettier": "2.3.2",
     "prop-types": "15.7.2",
     "react": "17.0.2",
     "react-dom": "17.0.2",
-    "react-test-renderer": "17.0.2",
-    "rollup": "2.55.1",
-    "rollup-plugin-peer-deps-external": "2.2.4",
-    "rollup-plugin-terser": "7.0.2",
-    "rollup-plugin-typescript2": "0.30.0",
-    "ts-jest": "26.5.6",
-    "tslib": "2.3.0",
-    "typescript": "4.3.5"
-  },
-  "files": [
-    "lib"
-  ],
-  "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not op_mini all"
-  ]
+    "ts-jest": "27.0.5",
+    "tslib": "2.3.1",
+    "typescript": "4.4.2"
+  }
 }
