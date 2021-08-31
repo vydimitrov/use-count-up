@@ -1,226 +1,181 @@
-import React from 'react'
-import { render } from '@testing-library/react'
+import { render, screen, waitFor } from '@testing-library/react'
 import '@testing-library/jest-dom/extend-expect'
 
 import { CountUp } from '.'
+import type { Props } from './types'
 
-const useElapsedTime = require('use-elapsed-time')
-
-const fixture = {
-  isCounting: false,
-  duration: 10,
-  end: 3684,
+interface RenderProps extends Partial<Props> {
+  children?: React.ReactNode
 }
 
-afterEach(() => {
-  useElapsedTime.__resetElapsedTime()
-})
+describe('CountUp', () => {
+  const children = jest.fn(({ value }) => value)
+  const fixture = {
+    isCounting: true,
+    duration: 0.74,
+    end: 3684,
+    children,
+  }
 
-describe('functional tests', () => {
-  it('should return the end value if duration is set to 0', () => {
-    const { getByText } = render(<CountUp {...fixture} duration={0} />)
+  const getSomeAnimatedValue = async () => {
+    await waitFor(() => expect(children.mock.calls.length).toBeGreaterThan(2))
+    return children.mock.calls[1][0].value
+  }
 
-    expect(getByText('3684')).toBeInTheDocument()
-  })
+  const renderComponent = (props: Partial<RenderProps>) =>
+    render(<CountUp {...fixture} {...props} />)
 
-  it('should return the end value when the duration is set to be less than the elapsed time', () => {
-    useElapsedTime.__setElapsedTime(17)
-    const { getByText } = render(<CountUp {...fixture} duration={0} />)
-
-    expect(getByText('3684')).toBeInTheDocument()
-  })
-
-  it('should use the default duration if it is not provided', () => {
-    useElapsedTime.__setElapsedTime(2)
-    const { getByText } = render(<CountUp {...fixture} duration={undefined} />)
-
-    expect(getByText('3684')).toBeInTheDocument()
-  })
-
-  it('should return the elapsed time from the start if end value is not provided', () => {
-    useElapsedTime.__setElapsedTime(17.345)
-    const { getByText } = render(
-      <CountUp {...fixture} end={undefined} start={43.67} />
-    )
-
-    expect(getByText('61.02')).toBeInTheDocument()
-  })
-
-  it('should pass isCounting to useElapsedTime hook', () => {
-    const isCounting = true
-
-    render(<CountUp {...fixture} isCounting={isCounting} />)
-
-    expect(useElapsedTime.__getIsPlaying()).toBe(isCounting)
-    useElapsedTime.__resetIsPlaying()
-  })
-
-  it('should pass config options to useElapsedTime hook', () => {
-    const onComplete = jest.fn()
-    const autoResetKey = '100'
-
-    render(<CountUp {...fixture} onComplete={onComplete} />)
-
-    expect(useElapsedTime.__getConfig()).toEqual({
-      duration: 10,
-      onComplete,
-      autoResetKey,
-    })
-
-    useElapsedTime.__resetIsPlaying()
-    useElapsedTime.__resetConfig()
-  })
-})
-
-describe('when using the component with children as a render prop', () => {
-  const reset = jest.fn()
-  beforeEach(() => {
-    useElapsedTime.__setElapsedTime(7.345)
-    useElapsedTime.__setResetMethod(reset)
-  })
   afterEach(() => {
-    useElapsedTime.__resetResetMethod()
+    children.mockClear()
   })
 
-  it('should pass the current count up value and reset method to children render function', () => {
-    const children = jest.fn()
-    render(
-      <CountUp {...fixture} start={43}>
-        {children}
-      </CountUp>
-    )
+  it('renders the value if children is not set as a function', () => {
+    renderComponent({ start: 24, children: undefined })
 
-    expect(children).toHaveBeenCalledWith({ value: '3616', reset })
+    expect(screen.getByText('24')).toBeVisible()
   })
-})
 
-describe('easing testing', () => {
-  it('should use the custom easing function when it is provided', () => {
-    useElapsedTime.__setElapsedTime(5)
+  it('returns the start value even when isCounting is not set', () => {
+    renderComponent({ start: 24, isCounting: undefined })
 
+    expect(screen.getByText('24')).toBeVisible()
+  })
+
+  it('returns the end value if duration is set to 0', () => {
+    renderComponent({ duration: 0 })
+
+    expect(screen.getByText('3684')).toBeVisible()
+  })
+
+  it('uses the default duration if it is not provided', async () => {
+    renderComponent({ duration: undefined })
+
+    expect(
+      await screen.findByText('3684', undefined, { timeout: 2000 })
+    ).toBeVisible()
+  })
+
+  it('returns the elapsed time from the start if end value is not provided', () => {
+    renderComponent({ end: undefined, start: 43.67 })
+
+    expect(screen.getByText('43.67')).toBeVisible()
+  })
+
+  it('passes the current count up value and reset method to children render function', () => {
+    renderComponent({ start: 3616 })
+
+    const args = children.mock.calls[0][0]
+    expect(args.value).toBe('3616')
+    expect(args.reset).toEqual(expect.any(Function))
+  })
+
+  it('uses the custom easing function when it is provided', () => {
     const easingReturnValue = '45687'
     const easing = jest.fn().mockReturnValue(easingReturnValue)
-    const { getByText } = render(<CountUp {...fixture} easing={easing} />)
 
-    expect(getByText(easingReturnValue)).toBeInTheDocument()
-    expect(easing).toHaveBeenCalledWith(5, 0, 3684, 10)
+    renderComponent({ easing })
+
+    expect(screen.getByText(easingReturnValue)).toBeVisible()
+    expect(easing).toHaveBeenCalledWith(0, 0, 3684, 0.74)
   })
 
   it.each`
-    easing            | midValue
-    ${'easeOutCubic'} | ${'3229'}
-    ${'easeInCubic'}  | ${'501'}
-    ${'linear'}       | ${'1865'}
+    easing
+    ${'easeOutCubic'}
+    ${'easeInCubic'}
+    ${'linear'}
   `(
-    'should return the correct start, mid and end values when the easing is set to $easing',
-    ({ easing, midValue }) => {
-      useElapsedTime.__setElapsedTime(0)
+    'returns the correct start and end values when the easing is set to $easing',
+    async ({ easing }) => {
+      renderComponent({ easing, start: 46 })
 
-      const getComponent = () => (
-        <CountUp {...fixture} start={46} easing={easing} />
-      )
-
-      const { getByText, rerender } = render(getComponent())
-
-      expect(getByText('46')).toBeInTheDocument()
-
-      useElapsedTime.__setElapsedTime(5)
-      rerender(getComponent())
-      expect(getByText(midValue)).toBeInTheDocument()
-
-      useElapsedTime.__setElapsedTime(10)
-      rerender(getComponent())
-      expect(getByText('3684')).toBeInTheDocument()
+      expect(screen.getByText('46')).toBeVisible()
+      expect(await screen.findByText('3684')).toBeVisible()
     }
   )
 
-  it.each`
-    easing            | midValue
-    ${'easeOutCubic'} | ${'694.2'}
-    ${'easeInCubic'}  | ${'139.0'}
-    ${'linear'}       | ${'416.6'}
-  `(
-    'should return the correct start, mid and end values when the easing is set to $easing and values have decimal places',
-    ({ easing, midValue }) => {
-      useElapsedTime.__setElapsedTime(0)
+  it('uses custom formatter when provided', async () => {
+    renderComponent({ start: 1236, formatter: (value) => `$${value} left` })
 
-      const getComponent = () => (
-        <CountUp {...fixture} start={46.5} end={786.7} easing={easing} />
-      )
-
-      const { getByText, rerender } = render(getComponent())
-
-      expect(getByText('46.5')).toBeInTheDocument()
-
-      useElapsedTime.__setElapsedTime(5)
-      rerender(getComponent())
-      expect(getByText(midValue)).toBeInTheDocument()
-
-      useElapsedTime.__setElapsedTime(10)
-      rerender(getComponent())
-      expect(getByText('786.7')).toBeInTheDocument()
-    }
-  )
-})
-
-describe('when formatting the number', () => {
-  it('should remove all decimal places by default', () => {
-    useElapsedTime.__setElapsedTime(6.789412)
-    const { getByText } = render(<CountUp {...fixture} />)
-
-    expect(getByText('3562')).toBeInTheDocument()
+    expect(screen.getByText('$1236 left')).toBeVisible()
   })
 
-  it('should add "." as decimal separator by default', () => {
-    useElapsedTime.__setElapsedTime(6.789412)
-    const { getByText } = render(<CountUp {...fixture} decimalPlaces={2} />)
+  it('removes all decimal places by default while animating if start value is an integer', async () => {
+    renderComponent({ start: 457 })
 
-    expect(getByText('3562.08')).toBeInTheDocument()
+    const value = await getSomeAnimatedValue()
+    expect(parseFloat(value) % 1).toBe(0)
   })
 
-  it('should add as many decimal places as the bigger decimal places count from start and end when decimalPlaces is not set and end has more decimal places', () => {
-    useElapsedTime.__setElapsedTime(2)
-    const { getByText } = render(
-      <CountUp {...fixture} start={12.478} end={18.93412} />
-    )
+  it('adds dot as a decimal separator by default', async () => {
+    renderComponent({ decimalPlaces: 2 })
 
-    expect(getByText('15.62859')).toBeInTheDocument()
+    const value = await getSomeAnimatedValue()
+    const [, decimal] = value.split('.')
+    expect(decimal.length).toBe(2)
   })
 
-  it('should add as many decimal places as the bigger decimal places count from start and end when decimalPlaces is not set and start has more decimal places', () => {
-    useElapsedTime.__setElapsedTime(2)
-    const { getByText } = render(
-      <CountUp {...fixture} start={12.478} end={18.9} />
-    )
+  it('adds as many decimal places as the bigger decimal places count from start and end when decimalPlaces is not set and end has more decimal places', async () => {
+    renderComponent({ start: 12.478, end: 18.93412 })
 
-    expect(getByText('15.612')).toBeInTheDocument()
+    const value = await getSomeAnimatedValue()
+    const [, decimal] = value.split('.')
+    expect(decimal.length).toBe(5)
   })
 
-  it('should use decimal and thousand separators if there are provided', () => {
-    useElapsedTime.__setElapsedTime(6.789412)
-    const { getByText } = render(
-      <CountUp
-        {...fixture}
-        decimalPlaces={2}
-        decimalSeparator=","
-        thousandsSeparator=" "
-      />
-    )
+  it('adds as many decimal places as the bigger decimal places count from start and end when decimalPlaces is not set and start has more decimal places', async () => {
+    renderComponent({ start: 12.478, end: 18.9 })
 
-    expect(getByText('3 562,08')).toBeInTheDocument()
+    const value = await getSomeAnimatedValue()
+    const [, decimal] = value.split('.')
+    expect(decimal.length).toBe(3)
   })
 
-  it('should add prefix when provided', () => {
-    useElapsedTime.__setElapsedTime(6.789412)
-    const { getByText } = render(<CountUp {...fixture} prefix="£" />)
+  it('uses decimal and thousand separators if there are provided', async () => {
+    renderComponent({
+      decimalPlaces: 2,
+      decimalSeparator: ',',
+      thousandsSeparator: ' ',
+      start: 1152,
+    })
 
-    expect(getByText('£3562')).toBeInTheDocument()
+    const value = await getSomeAnimatedValue()
+    const [int, decimal] = value.split(',')
+    const [thousands, hundreds] = int.split(' ')
+
+    expect(thousands.length).toBe(1)
+    expect(hundreds.length).toBe(3)
+    expect(decimal.length).toBe(2)
   })
 
-  it('should add suffix when provided', () => {
-    useElapsedTime.__setElapsedTime(6.789412)
-    const { getByText } = render(<CountUp {...fixture} suffix=" left" />)
+  it('adds prefix when provided', () => {
+    renderComponent({ prefix: '£', start: 3562 })
 
-    expect(getByText('3562 left')).toBeInTheDocument()
+    expect(screen.getByText('£3562')).toBeVisible()
+  })
+
+  it('adds suffix when provided', () => {
+    renderComponent({ suffix: ' left', start: 3562 })
+
+    expect(screen.getByText('3562 left')).toBeVisible()
+  })
+
+  it('fires updates per the updateInterval value', async () => {
+    const onUpdate = jest.fn()
+    renderComponent({
+      start: 5,
+      easing: 'linear',
+      duration: undefined,
+      end: undefined,
+      updateInterval: 1,
+      onUpdate,
+    })
+
+    expect(screen.getByText('5')).toBeVisible()
+    await waitFor(() => expect(onUpdate).toHaveBeenCalledWith('5'))
+    await waitFor(() => expect(onUpdate).toHaveBeenLastCalledWith('6'), {
+      timeout: 1500,
+    })
+    expect(screen.getByText('6')).toBeVisible()
   })
 })

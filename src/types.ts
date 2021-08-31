@@ -13,14 +13,14 @@ export type EasingFn = (
 ) => number
 export type Easing = 'easeOutCubic' | 'easeInCubic' | 'linear' | EasingFn
 
-export type CountUpReturnProps = {
+export interface ReturnProps {
   /** Current value of the count up animation */
   value: ReturnValue
   /** Method to start over the animation*/
   reset: ETReturnValue['reset']
 }
 
-export type CountUpProps = {
+export interface Props {
   /** Play and pause counting animation. Default: false */
   isCounting?: boolean
   /** Initial value. Default: 0 */
@@ -45,4 +45,8 @@ export type CountUpProps = {
   easing?: Easing
   /** Function that formats the output value */
   formatter?: (value: number) => ReturnValue
+  /** Update interval in seconds. Determines how often the animated value will change. When set to 0 the value will update on each key frame. Default: 0 */
+  updateInterval?: ETProps['updateInterval']
+  /** On value update event handler. It receives the current value */
+  onUpdate?: (value: ReturnValue) => void
 }

@@ -1,6 +1,6 @@
 import { useElapsedTime } from 'use-elapsed-time'
 import { defaultEasing, getEasing } from './easing'
-import type { CountUpProps, CountUpReturnProps } from './types'
+import type { Props, ReturnProps } from './types'
 
 const getDuration = (end?: number, duration?: number) => {
   if (typeof end !== 'number') {
@@ -36,33 +36,29 @@ export const useCountUp = ({
   onComplete,
   easing = defaultEasing,
   formatter,
-}: CountUpProps): CountUpReturnProps => {
+  updateInterval,
+  onUpdate,
+}: Props): ReturnProps => {
   const durationValue = getDuration(end, duration)
+  const getValue = (elapsedTime: number) => {
+    let rawValue
 
-  const { elapsedTime, reset } = useElapsedTime({
-    isPlaying: isCounting,
-    duration: durationValue,
-    onComplete,
-  })
+    if (durationValue === 0 && typeof end === 'number') {
+      rawValue = end
+    } else if (typeof end === 'number' && typeof durationValue === 'number') {
+      const easingFn = getEasing(easing)
+      // elapsedTime should always be less or equal to the durationValue
+      const time = elapsedTime < durationValue ? elapsedTime : durationValue
+      rawValue = easingFn(time, start, end - start, durationValue)
+    } else {
+      rawValue = start + elapsedTime
+    }
 
-  let rawValue
+    // Return value after formatting it
+    if (typeof formatter === 'function') {
+      return formatter(rawValue)
+    }
 
-  if (durationValue === 0 && typeof end === 'number') {
-    rawValue = end
-  } else if (typeof end === 'number' && typeof durationValue === 'number') {
-    const easingFn = getEasing(easing)
-    // elapsedTime should always be less or equal to the durationValue
-    const time = elapsedTime < durationValue ? elapsedTime : durationValue
-    rawValue = easingFn(time, start, end - start, durationValue)
-  } else {
-    rawValue = start + elapsedTime
-  }
-
-  let formattedValue
-
-  if (typeof formatter === 'function') {
-    formattedValue = formatter(rawValue)
-  } else {
     let tempValue
     if (decimalPlaces === 0) {
       const valueStr = Math.round(rawValue).toString()
@@ -73,8 +69,19 @@ export const useCountUp = ({
       tempValue = `${intFormatted}${decimalSeparator}${decimals}`
     }
 
-    formattedValue = `${prefix}${tempValue}${suffix}`
+    return `${prefix}${tempValue}${suffix}`
   }
 
-  return { value: formattedValue, reset }
+  const { elapsedTime, reset } = useElapsedTime({
+    isPlaying: isCounting,
+    duration: durationValue,
+    onComplete,
+    updateInterval,
+    onUpdate:
+      typeof onUpdate === 'function'
+        ? (currentTime: number) => onUpdate(getValue(currentTime))
+        : undefined,
+  })
+
+  return { value: getValue(elapsedTime), reset }
 }

@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types'
 import { useCountUp } from '.'
-import type { CountUpProps } from './types'
+import type { Props } from './types'
 
-export const CountUp: React.FC<CountUpProps> = ({ children, ...props }) => {
+export const CountUp: React.FC<Props> = ({ children, ...props }) => {
   const countUpProps = useCountUp(props)
 
   return typeof children === 'function'
