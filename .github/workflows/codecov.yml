@@ -11,8 +11,8 @@ jobs:
           node-version: '12.x'
       - name: Build & generate coverage report
         run: |
-          yarn install
-          yarn test-coverage
+          yarn
+          yarn test
       - name: Upload coverage
         if: success()
         uses: codecov/codecov-action@v2

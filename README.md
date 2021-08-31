@@ -24,7 +24,6 @@
 ## Key features
 
 :trophy: Lighter implementation and smaller bundle size [in comparison with similar feature solutions](https://bundlephobia.com/scan-results?packages=use-count-up@latest,react-countup)  
-:scroll: Support `toLocaleString` with fallback options  
 :flags: Declarative API _(no more imperative calls to `start()` and `update()`)_  
 &nbsp;:iphone:&nbsp; React Native support for iOS and Android  
 :deciduous_tree: Tree-shakable (minified size further reduced by ~ 0.4kB when only the hook is used)  

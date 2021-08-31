@@ -8,7 +8,14 @@
 - `autoResetKey` props has been deprecated
 - `toLocaleString` feature has been deprecated. The same result can be achieved using the `formatter` function.
 
+**New features:**
 
+- `updateInterval` prop now determines how often the animated value will change. When set to 0 the value will update on each key frame
+- `onUpdate` callback will be fired with the current animated value changes.
+
+**Implemented enhancements:**
+
+- bundle size is now even further reduced
 
 ## 2.3.1 (March 25th, 2021)
 
