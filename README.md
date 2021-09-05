@@ -144,7 +144,7 @@ const MyComponent = () => (
 
 ### Reset animation
 
-Pass a key prop to CountUp component and change the key when the timer should be reset.
+Pass a key prop to CountUp component and change the key when the animation should be reset. This is usually used when we want the animation to start over when either `start` or `end` value changes.
 
 ```jsx
 import { CountUp } from 'use-count-up'
@@ -194,6 +194,9 @@ const MyComponent = () => (
     duration={10}
     easing="linear"
     updateInterval={1}
+    onUpdate={(currentValue) => {
+      // it will fire once every second
+    }}
   />
 )
 ```
