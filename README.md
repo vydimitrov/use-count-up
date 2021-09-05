@@ -144,7 +144,7 @@ const MyComponent = () => (
 
 ### Reset animation
 
-Pass a key prop to CountUp component and change the key when the animation should be reset. This is usually used when we want the animation to start over when either `start` or `end` value changes.
+Pass a key prop to CountUp component and change it when the animation should repeat. It can be also used when a change of `start` or `end` value should start the animation over.
 
 ```jsx
 import { CountUp } from 'use-count-up'
