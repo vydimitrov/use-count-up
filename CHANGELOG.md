@@ -18,6 +18,8 @@
 **Implemented enhancements:**
 
 - bundle size is now even further reduced
+- `esbuild` is now used to bundle the code
+- example folder is added, which can be used for testing the hook and component
 
 ## 2.3.1 (March 25th, 2021)
 
