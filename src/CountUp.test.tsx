@@ -2,11 +2,8 @@ import { render, screen, waitFor } from '@testing-library/react'
 import '@testing-library/jest-dom/extend-expect'
 
 import { CountUp } from '.'
-import type { Props } from './types'
 
-interface RenderProps extends Partial<Props> {
-  children?: React.ReactNode
-}
+type Props = React.ComponentProps<typeof CountUp>
 
 describe('CountUp', () => {
   const children = jest.fn(({ value }) => value)
@@ -22,7 +19,7 @@ describe('CountUp', () => {
     return children.mock.calls[1][0].value
   }
 
-  const renderComponent = (props: Partial<RenderProps>) =>
+  const renderComponent = (props: Partial<Props>) =>
     render(<CountUp {...fixture} {...props} />)
 
   afterEach(() => {
@@ -146,18 +143,6 @@ describe('CountUp', () => {
     expect(thousands.length).toBe(1)
     expect(hundreds.length).toBe(3)
     expect(decimal.length).toBe(2)
-  })
-
-  it('adds prefix when provided', () => {
-    renderComponent({ prefix: '£', start: 3562 })
-
-    expect(screen.getByText('£3562')).toBeVisible()
-  })
-
-  it('adds suffix when provided', () => {
-    renderComponent({ suffix: ' left', start: 3562 })
-
-    expect(screen.getByText('3562 left')).toBeVisible()
   })
 
   it('fires updates per the updateInterval value', async () => {

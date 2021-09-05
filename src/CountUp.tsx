@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types'
 import { useCountUp } from '.'
 import type { Props } from './types'
 
@@ -11,20 +10,3 @@ export const CountUp: React.FC<Props> = ({ children, ...props }) => {
 }
 
 CountUp.displayName = 'CountUp'
-
-CountUp.propTypes = {
-  isCounting: PropTypes.bool,
-  start: PropTypes.number,
-  end: PropTypes.number,
-  duration: PropTypes.number,
-  decimalPlaces: PropTypes.number,
-  decimalSeparator: PropTypes.string,
-  thousandsSeparator: PropTypes.string,
-  prefix: PropTypes.string,
-  suffix: PropTypes.string,
-  onComplete: PropTypes.func,
-  // @ts-ignore Type checking can be improved here
-  easing: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
-  formatter: PropTypes.func,
-  children: PropTypes.func,
-}

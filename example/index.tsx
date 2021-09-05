@@ -9,12 +9,13 @@ const Count = () => {
     <div>
       <span>
         <CountUp
-          start={327}
+          start={32237}
           easing="linear"
           duration={undefined}
           isCounting={isPlaying}
-          updateInterval={1}
-          onUpdate={(value) => console.log(value)}
+          // updateInterval={1}
+          // onUpdate={(value) => console.log(value)}
+          formatter={(value) => value.toLocaleString()}
         >
           {({ value }) => value}
         </CountUp>

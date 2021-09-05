@@ -5,13 +5,15 @@
 **Breaking Changes:**
 
 - IE is not longer supported
-- `autoResetKey` props has been deprecated
-- `toLocaleString` feature has been deprecated. The same result can be achieved using the `formatter` function.
+- `autoResetKey` props has been deprecated.
+- `shouldUseToLocaleString` and the whole setup to use the built-in `toLocaleString` out of the box has been deprecated. The same result can be achieved using the `formatter` function.
+- React PropTypes has been removed as well as the `prop-types` peer-dependency. The component and hook will rely on the TypeScript types.
+- `prefix` and `suffix` props has been deprecated. The same result can be achieved just by adding them to in front and behind the value.
 
 **New features:**
 
-- `updateInterval` prop now determines how often the animated value will change. When set to 0 the value will update on each key frame
-- `onUpdate` callback will be fired with the current animated value changes.
+- `updateInterval` prop now determines how often the animated value will change. When set to 0 the value will update on each key frame (default behavior).
+- `onUpdate` callback will be fired with the current animated value when it changes.
 
 **Implemented enhancements:**
 

@@ -35,10 +35,6 @@ export interface Props {
   decimalSeparator?: string
   /** Thousands separator character. Default: "" */
   thousandsSeparator?: string
-  /** Static text before the value. Default: "" */
-  prefix?: string
-  /** Static text after the value. Default: "" */
-  suffix?: string
   /** On animation complete event handler */
   onComplete?: ETProps['onComplete']
   /**  Easing function to control how the animation is progressing. Default: easeOutExpo */

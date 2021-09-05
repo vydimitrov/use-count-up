@@ -31,8 +31,6 @@ export const useCountUp = ({
   decimalPlaces = getDefaultDecimalPlaces(start, end),
   decimalSeparator = '.',
   thousandsSeparator = '',
-  prefix = '',
-  suffix = '',
   onComplete,
   easing = defaultEasing,
   formatter,
@@ -59,17 +57,14 @@ export const useCountUp = ({
       return formatter(rawValue)
     }
 
-    let tempValue
     if (decimalPlaces === 0) {
       const valueStr = Math.round(rawValue).toString()
-      tempValue = addThousandsSeparator(valueStr, thousandsSeparator)
-    } else {
-      const [int, decimals] = rawValue.toFixed(decimalPlaces).split('.')
-      const intFormatted = addThousandsSeparator(int, thousandsSeparator)
-      tempValue = `${intFormatted}${decimalSeparator}${decimals}`
+      return addThousandsSeparator(valueStr, thousandsSeparator)
     }
 
-    return `${prefix}${tempValue}${suffix}`
+    const [int, decimals] = rawValue.toFixed(decimalPlaces).split('.')
+    const intFormatted = addThousandsSeparator(int, thousandsSeparator)
+    return `${intFormatted}${decimalSeparator}${decimals}`
   }
 
   const { elapsedTime, reset } = useElapsedTime({

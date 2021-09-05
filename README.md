@@ -26,7 +26,7 @@
 :trophy: Lighter implementation and smaller bundle size [in comparison with similar feature solutions](https://bundlephobia.com/scan-results?packages=use-count-up@latest,react-countup)  
 :flags: Declarative API _(no more imperative calls to `start()` and `update()`)_  
 &nbsp;:iphone:&nbsp; React Native support for iOS and Android  
-:deciduous_tree: Tree-shakable (minified size further reduced by ~ 0.4kB when only the hook is used)  
+:deciduous_tree: Tree-shakable  
 &nbsp;:file_cabinet: Server-side rendering (SSR) compatibility
 
 ## Installation
@@ -84,26 +84,21 @@ const MyComponent = () => {
 
 The component and the hook accept the same props. They are fully interchangeable.
 
-| Prop Name                   | Type                | Default      | Description                                                                                                                                                                                                                                                                                              |
-| --------------------------- | ------------------- | ------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **isCounting**              | boolean             | false        | Play and pause counting animation                                                                                                                                                                                                                                                                        |
-| **start**                   | number              | 0            | Initial value                                                                                                                                                                                                                                                                                            |
-| **end**                     | number              | -            | Target value                                                                                                                                                                                                                                                                                             |
-| **duration**                | number              | -            | Animation duration in seconds. Defaults to 2 seconds if `end` is set. If `end` isn't set, the animation will continue to Infinity.                                                                                                                                                                       |
-| **decimalPlaces**           | number              | -            | Number of decimal places after the decimal separator. Defaults to the max decimal places count from `start` and `end`                                                                                                                                                                                    |
-| **decimalSeparator**        | string              | -            | Decimal separator character                                                                                                                                                                                                                                                                              |
-| **thousandsSeparator**      | string              | -            | Thousands separator character                                                                                                                                                                                                                                                                            |
-| **prefix**                  | string              | -            | Static text before the value                                                                                                                                                                                                                                                                             |
-| **suffix**                  | string              | -            | Static text after the value                                                                                                                                                                                                                                                                              |
-| **shouldUseToLocaleString** | boolean             | false        | Indicates if `toLocaleString` should be used                                                                                                                                                                                                                                                             |
-| **toLocaleStringParams**    | { locale, options } | -            | Set `toLocaleString` locale and/or options by passing an object with `locale` and/or `options` keys. [Read more here](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat)                                                                   |
-| **fallbackPrefix**          | string              | -            | Static text before the value to be used in case `toLocaleString` params are not supported                                                                                                                                                                                                                |
-| **fallbackSuffix**          | string              | -            | Static text after the value to be used in case `toLocaleString` params are not supported                                                                                                                                                                                                                 |
-| **autoResetKey**            | number \| string    | -            | Auto reset animation when the key changes. Works similarly to React `key` prop                                                                                                                                                                                                                           |
-| **easing**                  | string \| function  | easeOutCubic | _Type: easeOutCubic \| easeInCubic \| linear \| [easing func](http://www.gizma.com/easing/)_ <br> Easing function to control the animation progress                                                                                                                                                      |
-| **onComplete**              | function            | -            | _Type: () => void \| {shouldRepeat: boolean, delay: number}_ <br> On complete handler. It can be used to repeat the animation by returning an object with the following props: `shouldRepeat` indicates if the animation should start over; `delay` specifies the delay before looping again in seconds. |
-| **formatter**               | function            | -            | _Type: (value: number) => number \| string \| node_ <br> A function that formats the output value. It has the highest priority so all other formating options are ignored                                                                                                                                |
-| **children**                | function            | -            | _Type: ({ value: number, reset: () => void }) => number \| string \| node_ <br> Render function to render the count up value. Used only by the component                                                                                                                                                 |
+| Prop Name              | Type               | Default      | Description                                                                                                                                                                                                                                                                                              |
+| ---------------------- | ------------------ | ------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **isCounting**         | boolean            | false        | Play and pause counting animation                                                                                                                                                                                                                                                                        |
+| **start**              | number             | 0            | Initial value                                                                                                                                                                                                                                                                                            |
+| **end**                | number             | -            | Target value                                                                                                                                                                                                                                                                                             |
+| **duration**           | number             | -            | Animation duration in seconds. Defaults to 2 seconds if `end` is set. If `end` isn't set, the animation will continue to Infinity.                                                                                                                                                                       |
+| **decimalPlaces**      | number             | -            | Number of decimal places after the decimal separator. Defaults to the max decimal places count from `start` and `end`                                                                                                                                                                                    |
+| **decimalSeparator**   | string             | -            | Decimal separator character                                                                                                                                                                                                                                                                              |
+| **thousandsSeparator** | string             | -            | Thousands separator character                                                                                                                                                                                                                                                                            |
+| **easing**             | string \| function | easeOutCubic | _Type: easeOutCubic \| easeInCubic \| linear \| [easing func](http://www.gizma.com/easing/)_ <br> Easing function to control the animation progress                                                                                                                                                      |
+| **onComplete**         | function           | -            | _Type: () => void \| {shouldRepeat: boolean, delay: number}_ <br> On complete handler. It can be used to repeat the animation by returning an object with the following props: `shouldRepeat` indicates if the animation should start over; `delay` specifies the delay before looping again in seconds. |
+| **formatter**          | function           | -            | _Type: (value: number) => number \| string \| node_ <br> A function that formats the output value. It has the highest priority so all other formating options are ignored                                                                                                                                |
+| **children**           | function           | -            | _Type: ({ value: number, reset: () => void }) => number \| string \| node_ <br> Render function to render the count up value. Used only by the component                                                                                                                                                 |
+| **updateInterval**     | number             | 0            | Update interval in seconds. Determines how often the animated value will change. When set to 0 the value will update on each key frame                                                                                                                                                                   |
+| **onUpdate**           | function           | -            | _(value: number \| string \| node) => void_ <br> On value update event handler. It receives the current value                                                                                                                                                                                            |
 
 ## Return values
 
@@ -125,82 +120,36 @@ const MyComponent = () => (
 )
 ```
 
-## Why use `toLocaleString`
+## Why use `toLocaleString` with `formatter`
 
 Number formatting varies per language group. For example, the number `3842.45` in German will be formatted as `3.842,45` whereas in British English it will be `3,842.45` (spot the different decimal and thousands separators). `Number.toLocaleString()` is a [built-in JS method](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/toLocaleString) that returns a string with a language-sensitive representation of the number. The basic implementation of the method will detect the default locale that is set up on the user's computer and will format the number accordingly. The browser support for `toLocaleString` [is incredibly good](https://caniuse.com/#search=number%20toLocaleString).
 
-If you expect variance in the geographical/country distribution of your users, then this is a must. The simplest way to use `toLocaleString` with the Count up component or hook is to pass `shouldUseToLocaleString: true` like so:
+If you expect variance in the geographical/country distribution of your users, then this is a must. The simplest way to use `toLocaleString` with the Count up component or hook is to use the `formatter` prop, like so:
 
 ```jsx
 import { CountUp } from 'use-count-up'
 
 const MyComponent = () => (
-  <CountUp isCounting end={1320} shouldUseToLocaleString />
+  <CountUp
+    isCounting
+    end={1320}
+    formatter={(value) => value.toLocaleString()}
+  />
 )
 ```
 
-`toLocaleString` method accepts an object with [two parameters](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat), `locale` and `options`, which allows further customization of the number value. Setting up the first parameter, `locale`, allows the use of a specific locale and fallback option. The second parameter, `options`, will let you format the value in a custom way. For example, you may choose to add a min and max number of decimal places, or set currency.
-
-Keep in mind though that the `locale` and `options` arguments are [not supported in all browsers](https://caniuse.com/#feat=mdn-javascript_builtins_number_tolocalestring_locales). Despite that, the Count up library offers fallback options in case you need to support obsolete or niche browsers.
-
-Setting up `toLocaleString` params without fallback options:
-
-```jsx
-import { useCountUp } from 'use-count-up'
-
-const MyComponent = () => {
-  const { value } = useCountUp({
-    isCounting: true,
-    end: 1320,
-    //enable toLocaleString and set params
-    shouldUseToLocaleString: true,
-    toLocaleStringParams: {
-      locale: 'de-DE',
-      options: { style: 'currency', currency: 'EUR', maximumFractionDigits: 2 },
-    },
-  })
-
-  return value
-}
-```
-
-Setting up `toLocaleString` params with fallback options:
-
-```jsx
-import { useCountUp } from 'use-count-up'
-
-const MyComponent = () => {
-  const { value } = useCountUp({
-    isCounting: true,
-    end: 1320,
-    shouldUseToLocaleString: true,
-    toLocaleStringParams: {
-      locale: 'de-DE',
-      options: { style: 'currency', currency: 'EUR', maximumFractionDigits: 2 },
-    },
-    // fallback options
-    decimalPlaces: 2,
-    decimalSeparator: ',',
-    thousandsSeparator: '.',
-    fallbackSuffix: '€',
-  })
-
-  return value
-}
-```
+`toLocaleString` method accepts an object with [two parameters](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat), `locale` and `options`, which allows further customization of the number value. Setting up the first parameter, `locale`, allows the use of a specific locale and fallback option. The second parameter, `options`, will let you format the value in a custom way. For example, you may choose to add a min and max number of decimal places, or set currency. Keep in mind though that the `locale` and `options` arguments are [not supported in all browsers](https://caniuse.com/#feat=mdn-javascript_builtins_number_tolocalestring_locales).
 
 ## Recipes
 
-### Reset animation on any prop change
+### Reset animation
 
-Pass the value of the prop that should reset the animation to `autoResetKey`. The most common use case here is resetting the animation when the `end` value changes. Example:
+Pass a key prop to CountUp component and change the key when the timer should be reset.
 
 ```jsx
 import { CountUp } from 'use-count-up'
 
-const MyComponent = ({ end }) => (
-  <CountUp isCounting end={end} autoResetKey={end} />
-)
+const MyComponent = ({ end }) => <CountUp isCounting end={end} key={end} />
 ```
 
 ### Repeat animation on completion
@@ -232,12 +181,19 @@ const MyComponent = () => <CountUp isCounting start={1024.4} />
 
 ### Count up/down n-seconds
 
-Set the `easing` to "linear" and `duration` to the seconds it should count up/down. Here is an example of a 10-second count-down:
+Set the `easing` to "linear" and `duration` to the seconds it should count up/down. The `updateInterval` can be set to 1, so it updates once every second. Here is an example of a 10-second count-down:
 
 ```jsx
 import { CountUp } from 'use-count-up'
 
 const MyComponent = () => (
-  <CountUp isCounting start={10} end={0} duration={10} easing="linear" />
+  <CountUp
+    isCounting
+    start={10}
+    end={0}
+    duration={10}
+    easing="linear"
+    updateInterval={1}
+  />
 )
 ```
