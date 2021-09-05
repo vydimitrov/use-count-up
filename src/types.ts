@@ -1,7 +1,4 @@
-import {
-  ReturnValue as ETReturnValue,
-  Props as ETProps,
-} from 'use-elapsed-time'
+import { Props as ETProps } from 'use-elapsed-time'
 
 export type ReturnValue = number | string | React.ReactNode
 
@@ -17,7 +14,7 @@ export interface ReturnProps {
   /** Current value of the count up animation */
   value: ReturnValue
   /** Method to start over the animation*/
-  reset: ETReturnValue['reset']
+  reset: () => void
 }
 
 export interface Props {
@@ -42,7 +39,7 @@ export interface Props {
   /** Function that formats the output value */
   formatter?: (value: number) => ReturnValue
   /** Update interval in seconds. Determines how often the animated value will change. When set to 0 the value will update on each key frame. Default: 0 */
-  updateInterval?: ETProps['updateInterval']
+  updateInterval?: number
   /** On value update event handler. It receives the current value */
   onUpdate?: (value: ReturnValue) => void
 }

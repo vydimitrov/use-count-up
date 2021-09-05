@@ -1,6 +1,12 @@
 # Change Log
 
-## 3.0.0 ( ---- , 2021)
+## 3.0.1 (September 5th, 2021)
+
+**Fix:**
+
+- upgraded `use-elapsed-time` to 3.0.2, which fixes an issue where reset method was taking any kind of value as newStartAt value. Not it checks if the value provided is a number
+
+## 3.0.0 ( September 5th , 2021)
 
 **Breaking Changes:**
 
