@@ -203,4 +203,4 @@ const MyComponent = () => (
 
 ## Browser support
 
-The component and hook supports [all modern browsers](https://caniuse.com/?search=es6) targeting `es6`. Internet Explorer (IE) is not longer supported.
+The component and hook support [all modern browsers](https://caniuse.com/?search=es6) targeting `es6`. Internet Explorer (IE) is not longer supported.
